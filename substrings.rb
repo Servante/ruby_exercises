@@ -10,7 +10,7 @@ def substrings(string, dictionary)
 	dictionary.each do |input| 
 		matched = string.scan(input) #adds a temporary variable with the matched word
 		unless matched == []   #if the variable is empty from above step, skips to the next iteration
-			words[input] = matched.length  #adds the word to the hash as a value, and adds a one to the key for word
+			matched_words[input] = matched.length  #adds the word to the hash as a value, and adds a one to the key for word
 		end
 	end
 	matched_words #displays hash
