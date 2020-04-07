@@ -4,7 +4,15 @@ tracked - turn counts
 
 game class
 
-player.marker - tracks turn
+
+
+
+player class
+
+-name
+-token
+-move history
+
 
 
 
@@ -22,17 +30,22 @@ game.turn
 2. checks turn count, assigns player.marker depending on if count is divisible by 2
 3. calls get player move
 
-get.player.move
+get.player_move
 
 1. create board
 2. ask player for move 
 3. check to see if valid move, assign if so
 
+
+
+
+
+
 =end
 
 
-class game 
-	attr_accessor:
+class Game 
+	attr_accessor 
 	def initialize (player, player_marker)
 		@player = player
 		@player_marker = player_marker
@@ -48,7 +61,32 @@ class game
 	end
 
 	def game_start
-		
+		puts "Welcome to Tic Tac Toe"
+		print "Player 1(X) please enter your name: "
+		p1 = gets.chomp
+		print "Player 2(O) please enter your name: "
+		p2 = gets.chomp
+		playerone = Player.new(p1, "X")
+		playertwo = Player.new(p2, "O")
+		game = Game.new(playerone, playertwo)
+
+
+	end
+
+end
+
+class Player
+	attr_accessor :name, :token
+	def initialize (name, token)
+		@name = name
+		@token = token
+	end
+end
+
+
+
+
+
 
 
 
