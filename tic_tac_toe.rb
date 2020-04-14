@@ -33,8 +33,8 @@ game.turn
 get_player_move
 
 1. create board - x
-2. ask player for move 
-3. check to see if valid move, assign if so
+2. ask player for move  - x
+3. check to see if valid move, assign if so - x
 
 game_finish
 
@@ -61,7 +61,7 @@ build game_finish -
 456
 789 
 
-
+memo: added helper methods, get_move added.
 
 =end
 
@@ -92,12 +92,16 @@ class Game
 	end
 
 	def self.start
-		puts "Welcome to Tic Tac Toe"
-		print "Player 1(X) please enter your name: "
-		p1 = gets.chomp
-		print "Player 2(O) please enter your name: "
-		p2 = gets.chomp
-		playerone = Player.new(p1, "X")
+		# puts "Welcome to Tic Tac Toe"
+		# print "Player 1(X) please enter your name: "
+		# p1 = gets.chomp
+		# print "Player 2(O) please enter your name: "
+		# p2 = gets.chomp
+		# playerone = Player.new(p1, "X")
+		# playertwo = Player.new(p2, "O")
+		p1 = "wes"
+		p2 = "bria"
+		playerone = Player.new(p1, "X")   #temp perm players added to aid in irb testing
 		playertwo = Player.new(p2, "O")
 		game = Game.new(playerone, playertwo)
 		# game_turn
@@ -120,8 +124,19 @@ class Game
 
 	def get_move(player)
 		create_board
+		answered = 0
+		until answered == 1
+			p "Choose your move, #{player.name}, (#{player.token}): "
+			move = gets.chomp.to_i 		
+				if move.to_s == @board[move]
+					@board[move] = player.token
+					answered += 1
+					create_board
+				else
+					puts "that's not a valid move"
+				end
+		end
 	end
-
 
 
 end
@@ -137,8 +152,15 @@ end
 
 
 
+#helper methods
 
+# def start      #for irb testing
+# 	Game.start
+# end
 
+def reload #reload current script for irb testing
+	load 'tic_tac_toe.rb'
+end
 
 
 
