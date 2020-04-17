@@ -61,14 +61,13 @@ build game_finish -
 456
 789 
 
-memo: added helper methods, get_move added.
+memo: 
 
 =end
 
 
 class Game 
 	attr_accessor :board, :player1, :player2
-	win = [[1,2,3], [4,5,6], [7,8,9], [1,4,7],[1,5,9], [2,5,8],[3,6,9],[3,5,7]]
 	def initialize(player1, player2)
 		@player1 = player1
 		@player2 = player2
@@ -86,41 +85,64 @@ class Game
 	end
 
 	def game_turn
-		check_win
-		player = turn_count % 2 == 1 ? @player1 : @player2
+		@turn_count += 1
+		player = @turn_count % 2 == 1 ? @player1 : @player2
+		check_win(@player1, @player1.moves)
+		check_win(@player2, @player2.moves)
 		get_move(player)
 	end
 
 	def self.start
-		# puts "Welcome to Tic Tac Toe"
-		# print "Player 1(X) please enter your name: "
-		# p1 = gets.chomp
-		# print "Player 2(O) please enter your name: "
-		# p2 = gets.chomp
-		# playerone = Player.new(p1, "X")
-		# playertwo = Player.new(p2, "O")
-		p1 = "wes"
-		p2 = "bria"
-		playerone = Player.new(p1, "X")   #temp perm players added to aid in irb testing
+		puts "Welcome to Tic Tac Toe"
+		print "Player 1(X) please enter your name: "
+		p1 = gets.chomp
+		print "Player 2(O) please enter your name: "
+		p2 = gets.chomp
+		playerone = Player.new(p1, "X")
 		playertwo = Player.new(p2, "O")
-		game = Game.new(playerone, playertwo)
-		# game_turn
+		# p1 = "wes"
+		# p2 = "bria"
+		# playerone = Player.new(p1, "X")   #temp perm players added to aid in irb testing
+		# playertwo = Player.new(p2, "O")
+		@game = Game.new(playerone, playertwo)
+		@game.game_turn
 	end
 
 	def check_win(player, player_moves)   #refactor
+		win = [[1,2,3], [4,5,6], [7,8,9], [1,4,7],[1,5,9], [2,5,8],[3,6,9],[3,5,7]]
+		if @turn_count >= 9
+			puts "Looks like we have a tie. What a surprise."
+			game_finish
+		end
+
 		win.each do |x|
 			count = 0
 			x.each do |x|
 				count += 1 if player_moves.include?(x)
 				if count == 3
-					puts "Congrats #{player}, you win!"
+					puts "Congrats #{player.name}, you win!"
+					create_board
 					game_finish
 				end
 			end
 		end
 	end
 
-	
+	def game_finish
+		puts "Would you like to play again?"
+		ans = gets.chomp.downcase
+		if ans == "yes"
+			Game.start
+		elsif ans == "no"
+			puts "Thanks for playing!"
+			exit
+		else
+			puts "I'm not sure what you mean."
+			game_finish
+		end
+	end
+
+			
 
 	def get_move(player)
 		create_board
@@ -131,7 +153,8 @@ class Game
 				if move.to_s == @board[move]
 					@board[move] = player.token
 					answered += 1
-					create_board
+					player.moves << move
+					game_turn
 				else
 					puts "that's not a valid move"
 				end
@@ -154,9 +177,9 @@ end
 
 #helper methods
 
-# def start      #for irb testing
-# 	Game.start
-# end
+def start      #for irb testing
+	Game.start
+end
 
 def reload #reload current script for irb testing
 	load 'tic_tac_toe.rb'
@@ -164,7 +187,7 @@ end
 
 
 
-
+Game.start
 
 
 
