@@ -1,8 +1,8 @@
 =begin
 
-1. - Build the game assuming the computer randomly selects the secret colors and the human player must guess them. Remember that you need to give the proper feedback on how good the guess was each turn!
+1. - Build the game assuming the computer randomly selects the secret colors and the human player must guess them. Remember that you need to give the proper feedback on how good the guess was each turn!- in progress
 
-2 - Now refactor your code to allow the human player to choose whether he/she wants to be the creator of the secret code or the guesser.
+2 - Now refactor your code to allow the human player to choose whmmether he/she wants to be the creator of the secret code or the guesser.
 
 3. - Build it out so that the computer will guess if you decide to choose your own secret colors. Start by having the computer guess randomly (but keeping the ones that match exactly).
 
@@ -44,7 +44,7 @@ game flow:
 
 single player version:
 
-game starts up
+game starts up  -  complete
 -shield creation
 -asks player for name
 -asks player how many guess attempts they want/difficulty (easy: 12, hard: 8)
@@ -75,16 +75,13 @@ game.class methods
 
 game - 
 
-instance variables: player, shield array, attempt_count
-shield_creation(method)
-create boards(method)(one board for guess attempt, one for feedback)
-colors(array)
-guess_limit(variable)
+instance variables: player, shield array, attempt_count - x
+shield_creation(method) - x
+colors(array) - x
+turn(method)
 game_win(method)
 game_lose(method)
-turn(method)
 check_win(method)
-create_shield(method)
 feedback(method)
 
 =end
@@ -101,4 +98,42 @@ end
 game_board = {"attempt 1" => [["r", "b", "g", "b"], ["x", "x", "o"]]}
 
 
+class Game
+	attr_accessor :player, :shield
+	def initialize(player, shield, difficulty)
+		@player = player
+		@shield = shield
+		@difficulty = difficulty
+		@attempt_count = 0
+	end
 
+
+
+	def self.start
+		shield = shield_creation
+		puts "Welcome to Mastermind. Terminal Edition."
+		puts "You will be the codebreaker. What is your name?"
+		name = gets.chomp
+		puts "Choose your difficulty, #{name}. Input 'easy' for 12 guess attempts and 'hard' for 8."
+		ans = gets.chomp.downcase
+		diff = ans == "easy" ? 8 : 12
+		@game = Game.new(name, shield, diff)
+	end
+
+
+	def shield_creation
+		color_array = ["r", "y", "b", "p", " ", "g"]
+		shield = []
+		repeat = 0
+		while repeat < 4
+			shield << color_array.sample
+			repeat += 1
+		end
+		return shield
+	end
+
+	def game_turn
+		#guess method - use an enumerator to ask the players guess for each position
+	end
+
+end
