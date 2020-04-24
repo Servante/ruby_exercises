@@ -53,11 +53,9 @@ game starts up  -  complete
 
 
 turn
--displays board
--checks guess limit
+-displays board - x
+-checks guess limit - x
 -asks player for guess
-	-uses serialization technique to repeatedly add inputs into an array until player is done typing
-		-checks to make sure there are four guesses, and that they all conform to correct abbreviations
 		-game performs check_win
 			-checks guess against shield
 			-game_win if match, else, runs feedback
@@ -78,10 +76,10 @@ game -
 instance variables: player, shield array, attempt_count - x
 shield_creation(method) - x
 colors(array) - x
-turn(method)
+turn(method) - x
+show_board(method) - x
 game_win(method)
 game_lose(method)
-check_win(method)
 feedback(method)
 
 =end
@@ -99,29 +97,17 @@ game_board = {"attempt 1" => [["r", "b", "g", "b"], ["x", "x", "o"]]}
 
 
 class Game
-	attr_accessor :player, :shield
+	attr_accessor :player, :shield, :board
 	def initialize(player, shield, difficulty)
 		@player = player
 		@shield = shield
 		@difficulty = difficulty
-		@attempt_count = 0
+		@attempt_count = 1
+		@board = {}
 	end
 
 
-
-	def self.start
-		shield = shield_creation
-		puts "Welcome to Mastermind. Terminal Edition."
-		puts "You will be the codebreaker. What is your name?"
-		name = gets.chomp
-		puts "Choose your difficulty, #{name}. Input 'easy' for 12 guess attempts and 'hard' for 8."
-		ans = gets.chomp.downcase
-		diff = ans == "easy" ? 8 : 12
-		@game = Game.new(name, shield, diff)
-	end
-
-
-	def shield_creation
+	def self.shield_creation
 		color_array = ["r", "y", "b", "p", " ", "g"]
 		shield = []
 		repeat = 0
@@ -133,7 +119,62 @@ class Game
 	end
 
 	def game_turn
-		#guess method - use an enumerator to ask the players guess for each position
+		if @attempt_count > @difficulty
+			puts "Sorry! The code remains uncracked."
+			exit
+		else
+			puts @attempt_count
+			guess
+		end
+	end
+
+	def guess
+		pos_no = 1
+		reply_array = []
+		until pos_no >= 5
+			puts "Whats your guess for position #{pos_no}?"
+			reply = gets.chomp.downcase
+			reply_array << reply
+			pos_no += 1
+		end
+		@board["#{@attempt_count}"] = reply_array.join(", ")
+		@attempt_count += 1
+		show_board
+		game_turn
+	end
+
+	# def interim    #method used for testing purposes
+	# 	if @attempt_count >= @difficulty
+	# 		puts "that's all folks!"
+	# 	else
+	# 		puts "that was fun. let's do it again.\n\n"
+	# 		guess
+	# 	end
+	# end
+
+	def show_board
+		puts "\n\n"
+		@board.each do |k, v|
+			puts "attempt #{k}: [#{v}]"
+		end
+		puts "\n\n"
+	end
+
+	def self.start
+		shield = Game.shield_creation
+		puts "Welcome to Mastermind. Terminal Edition."
+		puts "You will be the codebreaker. What is your name?"
+		name = gets.chomp
+		puts "Choose your difficulty, #{name}. Input 'easy' for 12 guess attempts and 'hard' for 8."
+		ans = gets.chomp.downcase
+		diff = ans == "easy" ? 8 : 12
+		@game = Game.new(name, shield, diff)
+		@game.game_turn
 	end
 
 end
+
+Game.start
+
+
+
