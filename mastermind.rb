@@ -79,7 +79,7 @@ colors(array) - x
 turn(method) - x
 show_board(method) - x
 game_win(method)
-game_lose(method)
+game_over(method)
 feedback(method)
 
 =end
@@ -123,7 +123,6 @@ class Game
 			puts "Sorry! The code remains uncracked."
 			exit
 		else
-			puts @attempt_count
 			guess
 		end
 	end
@@ -137,10 +136,9 @@ class Game
 			reply_array << reply
 			pos_no += 1
 		end
-		@board["#{@attempt_count}"] = reply_array.join(", ")
-		@attempt_count += 1
+		@board[@attempt_count] = reply_array
 		show_board
-		game_turn
+		feedback(@board[@attempt_count])
 	end
 
 	# def interim    #method used for testing purposes
@@ -171,6 +169,19 @@ class Game
 		@game = Game.new(name, shield, diff)
 		@game.game_turn
 	end
+
+	def feedback(guess_arr)
+		@attempt_count += 1
+		if guess_arr == @shield
+			puts "You win! The code has been cracked open like an egg."
+		else
+			game_turn
+		end
+
+	end
+
+
+
 
 end
 
