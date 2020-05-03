@@ -107,6 +107,10 @@ class Game
 	end
 
 
+# h = Hash.new{|hsh,key| hsh[key] = [] }
+# h['k1'].push 'a'
+# h['k1'].push 'b'
+
 	def self.shield_creation
 		color_array = ["r", "y", "b", "p", " ", "g"]
 		shield = []
@@ -137,8 +141,10 @@ class Game
 			pos_no += 1
 		end
 		@board[@attempt_count] = reply_array
-		show_board
+		p @board
 		feedback(@board[@attempt_count])
+		p @board
+		show_board
 	end
 
 	# def interim    #method used for testing purposes
@@ -152,10 +158,12 @@ class Game
 
 	def show_board
 		puts "\n\n"
-		@board.each do |k, v|
-			puts "attempt #{k}: [#{v}]"
-		end
+		@board.each {|k, v|
+			puts "Attempt #{k}: #{@board[k][(0...4)]} Feedback: #{@board[k][4]}"
+		}
 		puts "\n\n"
+		puts "test"
+		game_turn
 	end
 
 	def self.start
@@ -167,21 +175,29 @@ class Game
 		ans = gets.chomp.downcase
 		diff = ans == "easy" ? 8 : 12
 		@game = Game.new(name, shield, diff)
+		p shield
 		@game.game_turn
 	end
 
 	def feedback(guess_arr)
-		@attempt_count += 1
+		fb_array = []
 		if guess_arr == @shield
 			puts "You win! The code has been cracked open like an egg."
+			exit
 		else
-			game_turn
+			guess_arr.each_with_index {|v, i|
+				if @shield.include?(v) && @shield[i] == v
+					fb_array << "X"
+				elsif @shield.include?(v) && @shield[i] != v
+					fb_array << "O"
+				else
+					fb_array << "-"
+				end
+			}			
 		end
-
+		@board[@attempt_count] << fb_array
+		@attempt_count += 1
 	end
-
-
-
 
 end
 
