@@ -1,86 +1,8 @@
 =begin
 
-1. - Build the game assuming the computer randomly selects the secret colors and the human player must guess them. Remember that you need to give the proper feedback on how good the guess was each turn!- in progress
-
-2 - Now refactor your code to allow the human player to choose whmmether he/she wants to be the creator of the secret code or the guesser.
-
-3. - Build it out so that the computer will guess if you decide to choose your own secret colors. Start by having the computer guess randomly (but keeping the ones that match exactly).
-
-4. - Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
-
-
-*write a variable that includes instructions for the game (including: color description). advise the player they can scroll up to see the abbreviations
-
-*variable that holds the key combo of colors will be called "shield"
-
-*add feature to choose 8 or 12 turns in game
-
-*when displaying board, be sure to display attempt number and how many remaining
-
-------
-
-*full game
-
--is either player vs player or player vs computer
-
--decide on who many rounds in a game. has to be an even number. 
-
--codemaker earns points. one point for every guess, and one extra point if the other person can't solve it. winner is based on who has the most points. 
-
--codebreaker and codemaker classes. utilize inheritance with game and player classes
-
-
-pieces:
-
-decoding board (one board with four holes, smaller board to the side with four small holes)
-code pegs - six different colors (red[r], green[g], blue[b], yellow[y], pink[p], orange[o])
-key pegs -  black and white (for this game we will use x's and o's)
-	-x = for correct color and position
-	-o = for correct color, but not the position
-
-
-
-game flow:
-
-single player version:
-
-game starts up  -  complete
--shield creation
--asks player for name
--asks player how many guess attempts they want/difficulty (easy: 12, hard: 8)
--creates player
--creates game object with player, shield and difficulty
-
-
-turn
--displays board - x
--checks guess limit - x
--asks player for guess
-		-game performs check_win
-			-checks guess against shield
-			-game_win if match, else, runs feedback
-			-updates board hash with guess attempt and feedback
--prints hash
--guess limit updated
-	if guess_limit > difficulty game_lose
-		
-
-
-
-
-
-game.class methods
-
-game - 
-
-instance variables: player, shield array, attempt_count - x
-shield_creation(method) - x
-colors(array) - x
-turn(method) - x
-show_board(method) - x
-game_win(method)
-game_over(method)
-feedback(method)
+Mastermind
+version: 00
+05/06/2020
 
 =end
 
@@ -93,7 +15,44 @@ def reload
 end
 
 
-game_board = {"attempt 1" => [["r", "b", "g", "b"], ["x", "x", "o"]]}
+instructions = <<HEREDOC
+
+	Mastermind is a codebreaking game. A pattern of six colors is created, and the 
+	player has muliple attempts to guess the pattern. Feedback is given on each 
+	guess that contains clues to how close the player came to guessing the correct 
+	pattern. 
+
+
+THE CODE PEGS
+
+	There will be six colors to choose from when you guess, but this is a terminal 
+	game after all, so the colors will be represented by the first letter of the 
+	word of the color. 
+
+	red[r], green[g], blue[b], yellow[y], pink[p], orange[o]
+
+THE KEY PEGS
+
+	The key pegs will give you clues to how close your guess was. X's tell you 
+	that you got one code peg the correct color and position; while O reveals 
+	that only the color was correct. Review your feed back along with your 
+	guesses to make more informed attempts. 
+
+THE DECODING BOARD
+
+	As you play the board will create itself. See below for a sample line from the
+	board:
+
+
+	Attempt 1: [r, y, p, r] Feedback: [-, O, O, X]
+
+	
+	The above tells you the attempt number you're on and your guess pattern. From 
+	the feedback we can see that we got one completely wrong (-), two colored pegs 
+	correct, but not in the right position (O,O), and one was dead on in both color 
+	and position (X).
+
+HEREDOC
 
 
 class Game
@@ -104,15 +63,12 @@ class Game
 		@difficulty = difficulty
 		@attempt_count = 1
 		@board = {}
+		@color = ["r", "g", "b", "y", "p", "o"]
 	end
 
 
-# h = Hash.new{|hsh,key| hsh[key] = [] }
-# h['k1'].push 'a'
-# h['k1'].push 'b'
-
 	def self.shield_creation
-		color_array = ["r", "y", "b", "p", " ", "g"]
+		color_array = ["r", "y", "b", "p", "g"]
 		shield = []
 		repeat = 0
 		while repeat < 4
@@ -124,7 +80,9 @@ class Game
 
 	def game_turn
 		if @attempt_count > @difficulty
-			puts "Sorry! The code remains uncracked."
+			puts "\nSorry! The code remains uncracked."
+			p @shield
+			play_again
 			exit
 		else
 			guess
@@ -134,56 +92,73 @@ class Game
 	def guess
 		pos_no = 1
 		reply_array = []
+		puts "\n\nEnter the first letter of chosen color: \nred[r], green[g], blue[b], yellow[y], pink[p], orange[o]"
 		until pos_no >= 5
-			puts "Whats your guess for position #{pos_no}?"
-			reply = gets.chomp.downcase
-			reply_array << reply
-			pos_no += 1
+			puts "\nWhat's your guess for position #{pos_no}?"
+			reply = gets.chomp[0].downcase
+			if @color.include?(reply)
+				reply_array << reply
+			  pos_no += 1
+			elsif reply == "x"
+				p @shield
+			else
+				puts "\nPlease use one of the key colors: r, b, o, y, p, g. Try again."
+			end
 		end
 		@board[@attempt_count] = reply_array
-		p @board
-		feedback(@board[@attempt_count])
-		p @board
+		feedback(@board[@attempt_count])	
 		show_board
 	end
 
-	# def interim    #method used for testing purposes
-	# 	if @attempt_count >= @difficulty
-	# 		puts "that's all folks!"
-	# 	else
-	# 		puts "that was fun. let's do it again.\n\n"
-	# 		guess
-	# 	end
-	# end
+	def play_again
+		puts "Would you like to play again?"
+		res = gets.chomp.downcase
+		if res == "yes"
+			Game.start
+		elsif res == "no"
+			puts "Thanks for playing!"
+			exit
+		else
+			"I don't understand."
+		end
+	end
+
+	def self.get_difficulty
+		puts "\nChoose your difficulty, #{name}. Input 'easy' for 12 guess attempts and 'hard' for 8."
+		ans = gets.chomp.downcase
+		if ans == "easy"
+			return 12
+		elsif ans == "hard"
+			return 8
+		else
+			puts "\nI'm sorry, I don't understand."
+			self.get_difficulty
+		end
+	end
 
 	def show_board
 		puts "\n\n"
 		@board.each {|k, v|
-			puts "Attempt #{k}: #{@board[k][(0...4)]} Feedback: #{@board[k][4]}"
+			puts "Attempt [#{k}: #{@board[k][(0...4)].join(", ")}] Feedback: [#{@board[k][4].join(", ")}]"
 		}
 		puts "\n\n"
-		puts "test"
 		game_turn
 	end
 
 	def self.start
 		shield = Game.shield_creation
-		puts "Welcome to Mastermind. Terminal Edition."
 		puts "You will be the codebreaker. What is your name?"
 		name = gets.chomp
-		puts "Choose your difficulty, #{name}. Input 'easy' for 12 guess attempts and 'hard' for 8."
-		ans = gets.chomp.downcase
-		diff = ans == "easy" ? 8 : 12
+		diff = Game.get_difficulty
 		@game = Game.new(name, shield, diff)
-		p shield
 		@game.game_turn
 	end
 
 	def feedback(guess_arr)
 		fb_array = []
 		if guess_arr == @shield
-			puts "You win! The code has been cracked open like an egg."
-			exit
+			puts "\nYou win! The code has been cracked open like an egg."
+			play_again
 		else
 			guess_arr.each_with_index {|v, i|
 				if @shield.include?(v) && @shield[i] == v
@@ -195,13 +170,32 @@ class Game
 				end
 			}			
 		end
-		@board[@attempt_count] << fb_array
+		@board[@attempt_count] << fb_array.sort
 		@attempt_count += 1
 	end
-
 end
 
-Game.start
+def intro
+	puts "\nType 'view' to read the instructions and 'start' to begin the game."
+	reply = gets.chomp.downcase
+	case reply
+	when "view"
+		puts instructions
+		Game.Start
+	when "start"
+		Game.start
+	else
+		puts "\nI'm sorry, I don't understand."
+		intro
+	end
+end
+
+
+
+puts "Welcome to Mastermind. Terminal Edition.\n"
+
+intro
+
 
 
 
