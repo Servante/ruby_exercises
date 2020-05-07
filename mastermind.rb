@@ -139,7 +139,7 @@ class Game
 	def show_board
 		puts "\n\n"
 		@board.each {|k, v|
-			puts "Attempt [#{k}: #{@board[k][(0...4)].join(", ")}] Feedback: [#{@board[k][4].join(", ")}]"
+			puts "Attempt #{k}: [#{@board[k][(0...4)].join(", ")}] Feedback: [#{@board[k][4].join(", ")}]"
 		}
 		puts "\n\n"
 		game_turn
