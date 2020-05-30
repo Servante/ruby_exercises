@@ -11,14 +11,6 @@ Assignment
 
 4. - Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
 
-
-*write a variable that includes instructions for the game (including: color description). advise the player they can scroll up to see the abbreviations
-
-*variable that holds the key combo of colors will be called "shield"
-
-*add feature to choose 8 or 12 turns in game
-
-
 ------
 
 *full game
@@ -29,9 +21,6 @@ Assignment
 
 -codemaker earns points. one point for every guess, and one extra point if the other person can't solve it. winner is based on who has the most points. 
 
--codebreaker and codemaker classes. utilize inheritance with game and player classes
-
-
 pieces:
 
 decoding board (one board with four holes, smaller board to the side with four small holes)
@@ -40,39 +29,18 @@ key pegs -  black and white (for this game we will use x's and o's)
 	-X = for correct color and position
 	-O = for correct color, but not the position
 
-methods:
-
-Game
-
-intro
-new_game
-show_board
-create_shield
-get_difficulty
-game_turn
-get_player_guess
-feedback
-play_again
-
-
-Bot 
-
-bot_guess
-consider_feedback
-
-
 
 To Do:
 
--finish rewriting code to include new classes
-
-
-Create hash that will take two values(arrays) as a value
-
-h = Hash.new{|hsh,key| hsh[key] = [] }
-h['k1'].push 'a'
-h['k1'].push 'b'
-
+-rewrite instructions - X
+-rework instructions in code telling user to type 'help' to view them.
+-if easy, rewrite code so that when the user responds yes to play again, it goes straight to choose role
+-update the game_win methods to reflect user name or Hal
+-clean up alien references (save this to expand on the game in the future, where you track points/rounds)
+-update to introduce Hal. note which difficulty he chooses. 
+-create an array of famous computer names, and randomly name the bot
+-play through and add newlines
+-remove all evidence of pry
 
 
 =end
@@ -92,6 +60,11 @@ instructions = <<HEREDOC
 	player has muliple attempts to guess this pattern. Feedback is given on each 
 	guess that contains clues to how close the player came to guessing the correct 
 	pattern. 
+
+	You choose to be either the codemaker or codebreaker. If you prefer to create
+	an unbreakable code, a computer oppenent will be chosen to try and crack it. If
+	you decide you want to test your own logical prowess, a computer oppenent will 
+	create a pattern more secure than Fort Knox for you to bang your head against. 
 
 
 THE CODE PEGS
@@ -272,8 +245,7 @@ class Game
 		reply_array
 	end
 
-	def feedback(reply_array) #from game_turn
-		binding.pry
+	def feedback(reply_array) 
 		fb_array = []
 		if reply_array == @shield
 			puts "\nYou win! The code has been cracked open like an egg."
@@ -289,10 +261,8 @@ class Game
 				end
 			}			
 		end
-		binding.pry
 		@board[@attempt_count] = reply_array
 		@board[@attempt_count] << fb_array
-		binding.pry
 		bot.bot_review(reply_array)
 		@attempt_count += 1
 	end
@@ -325,7 +295,7 @@ class Bot
 	def initialize(role)
 		@name = "MUTHR"
 		@role = role
-		@memory = ["r", "g", "b", "y", "p", "o"]
+		@memory = []
 		@knowledge = {"-" => Hash.new{|hsh, key| hsh[key] = []}}
 	end
 
@@ -336,70 +306,43 @@ class Bot
 	def bot_guess
 		pos_no = 1
 		reply_array = []
-		binding.pry
 		puts "The ship shudders as MUTHR reallocates processing power to your code."
 		until pos_no >= 5
+			temp_memory = @memory
 			if @knowledge.has_key?(pos_no - 1)
 				reply_array << @knowledge[pos_no - 1]
+				@memory.delete(@knowledge[pos_no - 1]) if @memory.include?(pos_no - 1)
 				pos_no += 1					
-			else 
-				reply_array << memory.sample
+			elsif temp_memory.length <= 2 || temp_memory.empty? 
+				reply_array << CODE_PEGS.sample
+				pos_no += 1
+			else
+				temp_response = temp_memory.sample
+				reply_array << temp_response
+				temp_memory.delete(temp_response)
+				temp_response = nil
 				pos_no += 1
 			end
 		end		
 		puts "MUTHR's guess: #{reply_array.join(", ")}"
 		return reply_array
-		binding.pry
 	end
 
 	def bot_review(reply_feedback)          #clean up method
-		binding.pry
-		reply_feedback.each do |feedback|
-			feedback.each_with_index do |v, i|
-				binding.pry
-				if v == "X"
-					@knowledge[i] = v
-				elsif v == "O"
-					@memory << v 	#adds value to memory bank - needs to be reworked, ineffective
-				elsif v == "-"
-					@knowledge["-"][i].push v
-				else
-					puts "test"
-				end
-			end
+		reply_feedback[4].each_with_index do |v, i|
+			if v == "X"
+				@knowledge[i] = reply_feedback[i]
+			elsif v == "O"
+				@memory << reply_feedback[i]
+			elsif v == "-"
+				@knowledge["-"][i].push reply_feedback[i]
+			else
+				puts "test"
+			end			
 		end
 	end
 end
 
 
-#knowledge["-"][1].empty?
-
-
 
 Game.new_game
-
-
-
-
-
-
-
-=begin
-	
-bot_review:
-
-
-bot will take in feedback array and check if there are any x's
-	-if yes - bot will add color and index to knowledge hash
-and then it will check if there are any O's
-	-if yes - bot will add O creating colors to memory array
-
-bot_guess:
-
-if position_count equals a knowledge hash key, return the hash value
-otherwise do random sample of memory array
-
-
-
-
-=end
