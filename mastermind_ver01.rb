@@ -34,13 +34,38 @@ To Do:
 
 -rewrite instructions - X
 -rework instructions in code telling user to type 'help' to view them.
--if easy, rewrite code so that when the user responds yes to play again, it goes straight to choose role
+-if easy, rewrite code so that when the user responds yes to play again, it goes straight to choose role  - X
 -update the game_win methods to reflect user name or Hal
 -clean up alien references (save this to expand on the game in the future, where you track points/rounds)
 -update to introduce Hal. note which difficulty he chooses. 
 -create an array of famous computer names, and randomly name the bot
 -play through and add newlines
 -remove all evidence of pry
+
+
+
+error: 
+
+he's still picking one's he shouldn't. use binding to go in and find the problem. 
+
+example: 
+
+
+Attempt 1: [g, r, o, o] Feedback: [O, -, -, -]
+Attempt 2: [b, r, p, p] Feedback: [O, -, X, O]
+Attempt 3: [g, p, p, o] Feedback: [O, O, X, -]
+Attempt 4: [p, o, p, o] Feedback: [O, -, X, -]
+Attempt 5: [b, g, p, o] Feedback: [O, X, X, -]
+Attempt 6: [b, g, p, b] Feedback: [O, X, X, X]
+Attempt 7: [p, g, p, b] Feedback: [O, X, X, X]
+Attempt 8: [p, g, p, b] Feedback: [O, X, X, X] - it may also just be chance and not worth fixing. run a few times and compare the results.
+
+
+bot_review is placing into memory the twin of X producing duplicate values, leading to memory items that are never deleted. 
+
+
+
+
 
 
 =end
@@ -113,22 +138,11 @@ class Game
 
 	def self.intro
 		puts "\nWelcome to Mastermind. Terminal Edition.\n"
-		puts "\nDo you wish to view the instructions?"
+		puts "\nWhat's your name?"
 		reply = gets.chomp.downcase
-		if reply == "yes"
-			puts instructions
-		elsif reply == "no"
-			puts "\n"
-		else
-			"I do not understand."
-			intro
-		end
 	end
 
-	def self.new_game
-		Game.intro
-		puts "What's your name?"
-		name = gets.chomp
+	def self.new_game(player_name)
 		puts "Would you like to be the codebreaker or codemaker?"
 		role = gets.chomp.downcase
 		diff = nil
@@ -271,7 +285,7 @@ class Game
 		puts "Would you like to play again?"
 		res = gets.chomp.downcase
 		if res == "yes"
-			Game.new_game
+			Game.new_game(@name)
 		elsif res == "no"
 			puts "Thanks for playing!"
 			exit
@@ -303,24 +317,33 @@ class Bot
 		CODE_PEGS.sample(4)
 	end
 
+
+	#1.if knowledge has key reply with hash value
+#2.if memory array empty reply with random color code
+#3.if memory array has only one item, and that one item hasn't been guessed reply with memory_array
+#4.else reply with memory_array
+
 	def bot_guess
 		pos_no = 1
 		reply_array = []
+		one_in_array_guessed = false
 		puts "The ship shudders as MUTHR reallocates processing power to your code."
+		temp_memory = @memory
 		until pos_no >= 5
-			temp_memory = @memory
 			if @knowledge.has_key?(pos_no - 1)
 				reply_array << @knowledge[pos_no - 1]
 				@memory.delete(@knowledge[pos_no - 1]) if @memory.include?(pos_no - 1)
 				pos_no += 1					
-			elsif temp_memory.length <= 2 || temp_memory.empty? 
-				reply_array << CODE_PEGS.sample
+			elsif temp_memory.empty? || one_in_array_guessed == true
+				guess = bot_random_guess
+				reply_array << guess
 				pos_no += 1
 			else
 				temp_response = temp_memory.sample
 				reply_array << temp_response
 				temp_memory.delete(temp_response)
 				temp_response = nil
+				one_in_array_guessed = true if temp_memory.length < 2
 				pos_no += 1
 			end
 		end		
@@ -328,21 +351,34 @@ class Bot
 		return reply_array
 	end
 
-	def bot_review(reply_feedback)          #clean up method
+	def	bot_random_guess
+		guess = CODE_PEGS.sample
+		if @knowledge["-"].values.include?(guess)
+			bot_guess_check
+		else
+			return guess
+		end
+	end
+
+	def bot_review(reply_feedback)
+		added_values = []   
 		reply_feedback[4].each_with_index do |v, i|
-			if v == "X"
+			if v == "X"     #
 				@knowledge[i] = reply_feedback[i]
-			elsif v == "O"
+				@memory.delete(reply_feedback[i]) if @memory.include?(reply_feedback[i])
+				added_values << reply_feedback[i]
+			elsif v == "O" && @memory.include?(reply_feedback[i]) == false && added_values.include?(reply_feedback[i]) == false
 				@memory << reply_feedback[i]
 			elsif v == "-"
 				@knowledge["-"][i].push reply_feedback[i]
 			else
-				puts "test"
 			end			
 		end
 	end
 end
 
 
+player_name = Game.intro
 
-Game.new_game
+
+Game.new_game(player_name)
