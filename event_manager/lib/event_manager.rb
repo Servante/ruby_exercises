@@ -42,20 +42,25 @@ Use Date#wday to find out the day of the week.
 	
 =end
 
-
-
-
-
-
-require "csv"
+require 'pry'
+require 'csv'
 require 'google/apis/civicinfo_v2'
 require 'erb'
 
-civic_info = Google::Apis::CivicinfoV2::CivicInfoService.new
-civic_info.key = 'AIzaSyClRzDqDh5MsXwnCWi0kOiiBivP6JsSyBw'
-
 def clean_zipcode(zipcode)
 	zipcode.to_s.rjust(5, "0")[0..4]
+end
+
+def clean_phone(phone)
+	#binding.pry
+	phone.tr!('-''()'' ''.', '') unless phone == nil
+	if (phone.length > 10 && phone[0] != "1") || phone.length < 10
+		puts "No valid phone number provided."
+	elsif phone.length > 10 && phone[0] == "1"
+		phone[1..9]
+	else
+		return phone
+	end
 end
 
 def legislators_by_zipcode(zip)
@@ -93,13 +98,14 @@ contents.each do |row|
 	id = row[0]
 	name = row[:first_name]	
 	zipcode = clean_zipcode(row[:zipcode])
+	phone = clean_phone(row[:homephone])
+	#binding.pry
 	legislators = legislators_by_zipcode(zipcode)	
 
-	form_letter = erb_template(binding)
+	form_letter = erb_template.result(binding)
 
 	save_thank_you_letter(id, form_letter)
 
 
 end
 
-#puts "#{name} #{zipcode} #{legislators}"

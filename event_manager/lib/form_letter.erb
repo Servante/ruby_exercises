@@ -23,8 +23,18 @@
         <% end %>
     <% else%>
       <th></th>
-      <td><% "#{legislators}" %></td>
-    <%> end %>
+      <td><%= "#{legislators}" %></td>
+    <% end %>
   </table>
+
+  <% if phone == nil %>
+    <p>
+      Please contact your closest office or visit our website to add your phone number for important updates relating to your district.
+    </p>
+  <% else %>
+    <p>
+      According to our records, your current phone number is:<%= phone %>, if you would like to receive updates related to your district do nothing. You will be instantly notified of breaking events. If you would like to opt out, simply respond "STOP" to any text you receive.
+    </p> 
+  <% end %>
 </body>
 </html>
