@@ -42,12 +42,11 @@ write out pseudocode
 	  -displays board
 -player turn 
 	-asks player for guess
-		-turn count += 1
+		-guess_count += 1
 		-checks to see if secret word includes guess
 			-if so, updates board
 					-word uncovered
-					-guess counts updated
-					-any missed guesses added to missed array
+					-remove letter from correct_letter
 			-if not
 					-guess counts updated
 					-missed letter added to missed array
@@ -62,6 +61,7 @@ encrypt
 game_turn
 random_word
 game_over
+player_guess
 
 
 =end
@@ -75,7 +75,8 @@ class Game
 		@player = player
 		@guess_count = 0
 		@secret_word = secret_word
-		@missed_words = []
+		@correct_letters = [secret_word]
+		@missed_letters = []
 		@board = encrypted_word
 	end
 
@@ -125,10 +126,40 @@ class Game
 	end
 
 	def game_turn
+		show_board
 		if @guesses_remaining = 0
 			puts "I'm sorry, the time has come. The doomed is doomed."
 			game_over
 		else
+			player_guess
+		end
+
+	def player_guess
+		@guess_count += 1
+		puts "Please enter a guess or type 'save' to save your game."
+		response = gets.chomp.downcase
+		if response == "save"
+			#save the game - ask if they want to keep playing
+		else
+			if @correct_letters.include?(response)
+				puts "The secret word contains a #{response}."
+				#remove letter from correct_letters
+				#uncovers letter in board
+				show_board
+				game_turn
+			else
+				puts "The secret word does not contain a #{response}."
+				#adds response to @missed_letters
+				show_board
+				game_turn
+			end
+		end
+	end
+
+
+
+
+
 end
 
 
