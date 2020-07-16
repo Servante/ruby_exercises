@@ -13,13 +13,6 @@
 6. When the program first loads, add in an option that allows you to open one of your saved games, which should jump you exactly back to where you were when you saved. Play on!
 
 
-board - 
-	-current word
-	-letters missed
-	-attempts left (6)
-
-	
-
 pseudocode
 
 -asks user if they want to load game or start new game 
@@ -60,6 +53,7 @@ methods:
 start
 new_game
 encrypt
+show_board
 game_turn
 random_word
 edit_board
@@ -69,15 +63,32 @@ player_guess
 
 GITHUB:
 
-
+debug, looped player_guess for nil, backdoor key reveal, game_over method added, program stable/playable
 
 
 
 to-do:
 
-finish changing guess attempts to guesses remaining
-test code
+finish changing guess attempts to guesses remaining - x
+build in secret word reveal - x 
+build game_over method - x 
+test code - x
 begin serialization
+	load functionality
+	save functionality
+write instructions
+utilize player name
+cosmetic runthrough
+	-add newlines
+	-add asterisks around board
+
+
+
+bugs:
+
+missed letters isn't working - x
+
+
 
 
 
@@ -90,9 +101,9 @@ begin serialization
 require 'pry'
 
 class Game
-	attr_accessor :player, :attempt_count, :remaining_attempts, :missed_letters, :board
-	def initialize(player, secret_word, encrypted_word)
-		@player = player
+	attr_accessor :player_name, :attempt_count, :remaining_attempts, :missed_letters, :board, :guess_history
+	def initialize(player_name, secret_word, encrypted_word)
+		@player_name = player_name
 		@remaining_attempts = 7
 		@key = secret_word
 		@missed_letters = []
@@ -141,8 +152,8 @@ class Game
 
 	def show_board
 		puts @board
-		puts "Missed letters: #{@missed_words}"
-		puts "Guess Attempts: #{@guess_count}/6"
+		puts "Missed letters: #{@missed_letters}"
+		puts "Guesses Remaining: #{@remaining_attempts}"
 	end
 
 	def edit_board(player_guess)
@@ -152,7 +163,6 @@ class Game
 	def game_turn
 		show_board
 		if @remaining_attempts == 0
-			puts "I'm sorry, the time has come. The doomed is doomed."
 			game_over
 		else
 			player_guess
@@ -160,7 +170,7 @@ class Game
 	end
 
 	def player_guess
-		puts "Please enter a guess or type 'save' to save your game."
+		puts "Please enter a letter or type 'save' to save your game."
 		response = gets.chomp.downcase
 		if response == "save"
 			#save the game - ask if they want to keep playing
@@ -168,21 +178,44 @@ class Game
 			#binding.pry
 			if @guess_history.include?(response)
 				puts "You've already guessed that letter."
+				show_board
 				player_guess
 			elsif @key.include?(response)
 				puts "The secret word contains an #{response}."
+				@guess_history << response
 				edit_board(response)
-				show_board
 				game_turn
+			elsif response == "key"
+				puts @key
+				player_guess
+			elsif response == nil
+				player_guess
 			else
 				puts "The secret word does not contain an #{response}."
-				@guess_count -= 1
+				@guess_history << response
+				@remaining_attempts -= 1
 				@missed_letters << response
-				show_board
+				# binding.pry
 				game_turn
 			end
 		end
 	end
+
+	def game_over
+		puts "I'm sorry, the time has come. The doomed is doomed."
+		puts @key
+		show_board
+		puts "Would you like to play again?"
+		again = gets.chomp.downcase
+		# binding.pry
+		if again == "yes" || again == "y"			
+			Game.new_game(@player_name)
+		else
+			puts "Thanks for playing, #{@player_name}!"
+			exit
+		end
+	end
+
 end
 
 
