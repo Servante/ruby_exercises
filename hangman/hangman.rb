@@ -20,7 +20,7 @@ board -
 
 	
 
-write out pseudocode
+pseudocode
 
 -asks user if they want to load game or start new game 
 -randomly puts a word from the dictionary file
@@ -52,6 +52,8 @@ write out pseudocode
 					-missed letter added to missed array
 
 
+
+
 methods:
 
 
@@ -60,24 +62,42 @@ new_game
 encrypt
 game_turn
 random_word
+edit_board
 game_over
 player_guess
+
+
+GITHUB:
+
+
+
+
+
+to-do:
+
+finish changing guess attempts to guesses remaining
+test code
+begin serialization
+
 
 
 =end
 
 
+
+
+
 require 'pry'
 
 class Game
-	attr_accessor :player, :attempt_count, :guess_count, :missed_words, :board
+	attr_accessor :player, :attempt_count, :remaining_attempts, :missed_letters, :board
 	def initialize(player, secret_word, encrypted_word)
 		@player = player
-		@guess_count = 0
-		@secret_word = secret_word
-		@correct_letters = [secret_word]
+		@remaining_attempts = 7
+		@key = secret_word
 		@missed_letters = []
 		@board = encrypted_word
+		@guess_history = []
 	end
 
 	def self.start
@@ -110,7 +130,7 @@ class Game
 	def self.random_word
 	  chosen_word = nil
 	  File.foreach("dictionary.txt").each_with_index do |line, number|
-	    chosen_word = line if rand < 1.0/(number+1) && line.length > 4 && line.length < 13
+	    chosen_word = line if rand < 1.0/(number+1) && line.length > 4 && line.length < 8
 	  end
 	  return chosen_word
 	end
@@ -125,41 +145,44 @@ class Game
 		puts "Guess Attempts: #{@guess_count}/6"
 	end
 
+	def edit_board(player_guess)
+		@key.split('').each_with_index {|v, i| @board[i] = player_guess if v == player_guess}
+	end
+
 	def game_turn
 		show_board
-		if @guesses_remaining = 0
+		if @remaining_attempts == 0
 			puts "I'm sorry, the time has come. The doomed is doomed."
 			game_over
 		else
 			player_guess
 		end
+	end
 
 	def player_guess
-		@guess_count += 1
 		puts "Please enter a guess or type 'save' to save your game."
 		response = gets.chomp.downcase
 		if response == "save"
 			#save the game - ask if they want to keep playing
 		else
-			if @correct_letters.include?(response)
-				puts "The secret word contains a #{response}."
-				#remove letter from correct_letters
-				#uncovers letter in board
+			#binding.pry
+			if @guess_history.include?(response)
+				puts "You've already guessed that letter."
+				player_guess
+			elsif @key.include?(response)
+				puts "The secret word contains an #{response}."
+				edit_board(response)
 				show_board
 				game_turn
 			else
-				puts "The secret word does not contain a #{response}."
-				#adds response to @missed_letters
+				puts "The secret word does not contain an #{response}."
+				@guess_count -= 1
+				@missed_letters << response
 				show_board
 				game_turn
 			end
 		end
 	end
-
-
-
-
-
 end
 
 
