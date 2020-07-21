@@ -45,6 +45,10 @@ pseudocode
 					-missed letter added to missed array
 
 
+  |
+ \o/
+  |
+ / \
 
 
 methods:
@@ -59,11 +63,11 @@ random_word
 edit_board
 game_over
 player_guess
+load_game
+save_game
 
 
 GITHUB:
-
-debug, looped player_guess for nil, backdoor key reveal, game_over method added, program stable/playable
 
 
 
@@ -73,21 +77,23 @@ finish changing guess attempts to guesses remaining - x
 build in secret word reveal - x 
 build game_over method - x 
 test code - x
-begin serialization
-	load functionality
-	save functionality
+begin serialization -
+	load functionality - x 
+	save functionality - x
 write instructions
 utilize player name
 cosmetic runthrough
 	-add newlines
-	-add asterisks around board
+	-disallow proper nouns - x
+	-add players names/other enhancements for saving AND loading
+build in rescue for nil word selection
 
-
+   
 
 bugs:
 
 missed letters isn't working - x
-
+error thrown occasionally for grabbing illegal words -
 
 
 
@@ -95,13 +101,11 @@ missed letters isn't working - x
 =end
 
 
-
-
-
 require 'pry'
+require 'yaml'
 
 class Game
-	attr_accessor :player_name, :attempt_count, :remaining_attempts, :missed_letters, :board, :guess_history
+	attr_accessor :player_name, :remaining_attempts, :key, :missed_letters, :board, :guess_history
 	def initialize(player_name, secret_word, encrypted_word)
 		@player_name = player_name
 		@remaining_attempts = 7
@@ -125,7 +129,7 @@ class Game
 			name = gets.chomp
 			Game.new_game(name)
 		when 2
-			#load game
+			Game.load_game
 		when 3
 			#instructions
 		end
@@ -135,13 +139,27 @@ class Game
 		secret_word = Game.random_word
 		encrypted_word = Game.encrypt(secret_word)
 		@game = Game.new(player_name, secret_word, encrypted_word)
+		# binding.pry
 		@game.game_turn
 	end
+
+	def save_game
+		yaml = YAML::dump(self)
+		File.open("save_file.yaml", "w+") {|x| x.write yaml}
+		puts "Game saved!"
+	end
+
+	def self.load_game
+		save_file = File.open("save_file.yaml")
+		@game = YAML::load(save_file)
+		@game.game_turn
+	end
+
 
 	def self.random_word
 	  chosen_word = nil
 	  File.foreach("dictionary.txt").each_with_index do |line, number|
-	    chosen_word = line if rand < 1.0/(number+1) && line.length > 4 && line.length < 8
+	    chosen_word = line if rand < 1.0/(number+1) && line.length > 4 && line.length < 8 && line.scan(/[A-Z]/).empty?
 	  end
 	  return chosen_word
 	end
@@ -151,9 +169,14 @@ class Game
 	end
 
 	def show_board
+		puts "\n\n\n"
+		mr_doomed = [" " + "|" + " " + "\n", "\\", "o", "/" + "\n", " " + "|" + " " + "\n", "/" + " ", "\\" + "\n"]
+		if @missed_letters.size > -1 then print mr_doomed[0...(@missed_letters.size)].join('') end
+		puts "\n\n"
 		puts @board
 		puts "Missed letters: #{@missed_letters}"
 		puts "Guesses Remaining: #{@remaining_attempts}"
+		puts "\n"
 	end
 
 	def edit_board(player_guess)
@@ -163,9 +186,14 @@ class Game
 	def game_turn
 		show_board
 		if @remaining_attempts == 0
-			game_over
-		else
+			puts "I'm sorry, the time has come. The doomed is doomed."
+		  puts "The secret word was: #{@key}"
+			play_again
+		elsif @board.split("").include?("_")
 			player_guess
+		else
+			puts "Congratulations #{player_name}, you've won!"
+			play_again
 		end
 	end
 
@@ -173,9 +201,10 @@ class Game
 		puts "Please enter a letter or type 'save' to save your game."
 		response = gets.chomp.downcase
 		if response == "save"
+			save_game
 			#save the game - ask if they want to keep playing
 		else
-			#binding.pry
+			# binding.pry
 			if @guess_history.include?(response)
 				puts "You've already guessed that letter."
 				show_board
@@ -201,9 +230,9 @@ class Game
 		end
 	end
 
-	def game_over
-		puts "I'm sorry, the time has come. The doomed is doomed."
-		puts @key
+
+	def play_again
+		
 		show_board
 		puts "Would you like to play again?"
 		again = gets.chomp.downcase
@@ -215,14 +244,13 @@ class Game
 			exit
 		end
 	end
-
 end
 
 
+
+
+
 Game.start
-
-
-
 
 
 
