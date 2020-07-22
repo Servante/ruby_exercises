@@ -2,6 +2,7 @@ require 'yaml'
 
 class Game
 	attr_accessor :player_name, :remaining_attempts, :key, :missed_letters, :board, :guess_history
+
 	def initialize(player_name, secret_word, encrypted_word)
 		@player_name = player_name
 		@remaining_attempts = 7
@@ -46,7 +47,7 @@ class Game
 	def self.load_game
 		save_file = File.open("save_file.yaml")
 		@game = YAML::load(save_file)
-		puts "\nWelcome back #{@player_name}!"
+		puts "\nWelcome back, #{@game.player_name}!"
 		@game.game_turn
 	end
 
