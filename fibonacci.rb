@@ -1,9 +1,5 @@
-# 1.Write a method #fibs which takes a number and returns that many members of the fibonacci sequence. Use iteration for this solution.
 
-# 2.Now write another method #fibs_rec which solves the same problem recursively. This can be done in just 3 lines (or 1 if you’re crazy, but don’t consider either of these lengths a requirement… just get it done).
-
-
-def fib(n)
+def fib_iterative(n)
 	sequence = [0, 1]
 	for x in 0..(n - 3)
 		sequence << sequence[-2] + sequence[-1]
@@ -11,6 +7,20 @@ def fib(n)
 	p sequence
 end
 
+fib_iterative(25)
 
-fib(3)
+
+
+def fib_recursive(n, seq = [0, 1])
+	if n == 0
+		[0]
+	elsif n == 1
+		seq
+	else
+		seq << (seq[-1] + seq[-2])
+		fib_recursive(n-1, seq)
+	end
+end
+
+p fib_recursive(25)
 
