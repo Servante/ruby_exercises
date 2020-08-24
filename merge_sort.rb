@@ -22,10 +22,10 @@ def merge_sort(arr)
 
 		until b.empty? || c.empty?
 			a <<  if b[0] < c[0]
-							b.shift
-						else
-							c.shift
-						end
+				b.shift
+			else
+				c.shift
+			end
 		end
 		a.concat(b, c)
 	end
