@@ -8,27 +8,38 @@ Tips:Think about what the base case is and what behavior is happening again
 and again and can actually be delegated to someone else (e.g. that same method!).
 
 
-
-psuedocode
-
-
-merge(b[1..p], c[1..q], a[1..p+q])
-
-ib = 1, ic = 1, ia = 1   #pointers
-
-while ib <= p and ic <= q
-  if b[ib] < c[ic]
-    a[ia] = b[ib] ; ib = ib + 1
-  else 
-    a[ia] = c[ic] ; ic = ic + 1 
-  ia = ia + 1
-
-if ib == p + 1
-  copy c[ic..q] into a[ik..p + q]
-else
-  copy b[ib..p] into a[ik..p+q]
+=end
 
 
-#append
+def merge_sort(arr)
+	n = arr.size
+	a = []
+	if n < 2
+		arr		
+	else
+		b = merge_sort(arr[0, n/2])
+		c = merge_sort(arr[n/2, n])
 
+		until b.empty? || c.empty?
+			a <<  if b[0] < c[0]
+							b.shift
+						else
+							c.shift
+						end
+		end
+		a.concat(b, c)
+	end
 end
+
+arr = Array.new(23) {rand (1..1000)}
+
+p merge_sort(arr)
+
+
+
+
+
+
+
+
+
