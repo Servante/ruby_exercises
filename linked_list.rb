@@ -31,7 +31,6 @@ class LinkedList
 	end
 
 	def prepend(v)
-		binding.pry
 		if @head.nil?
 			@head = v ; @tail = v
 		else
@@ -54,7 +53,6 @@ class LinkedList
 	end
 
 	def at(index)
-		binding.pry
 		self.each_with_index {|v, i| return v if i == index}
 		puts "There are no records at that index."
 	end
@@ -63,7 +61,6 @@ class LinkedList
 		if @tail.nil?
 			puts "I'm sorry, there is nothing to pop."
 		else
-			binding.pry
 			@tail.prev.next = nil ; @tail = @tail.prev
 		end
 	end
