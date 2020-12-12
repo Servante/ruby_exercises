@@ -116,35 +116,24 @@ class Tree
 			end
 		end
 	end
-	
 
-	#delete
+	def insert(key, root = @root)
+		if root == nil
+			return Node.new(key)
+		elsif root.data == key
+			puts "node already exists"
+			return root
+		end
 
-	#insert
-
+		if root.data > key
+			root.left_child = insert(key, root.left_child)
+		else
+			root.right_child = insert(key, root.right_child)
+		end
+		root
+	end
 end
 
 
-# Write an #insert and #delete method which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not). If you need additional resources, check out these two articles on inserting and deleting, or this video with several visual examples.
-
-#if you need more help with delete, finish watching youtube video at 11:22 mark
-
-#when deleting: keep in mind "no point in searching to the left (or right) since everything will be smaller(or larger)"
-
-#to find the node's successor find the smallest node in its right subtree. and vice versa
-
-
-
-=begin
-take in array
-a_start = arr[0]
-a_end   = arr[-1]
-if arr[0] > arr[-1] return nil
-mid = (a_start + a_end)/2
-create a new tree node with middle value
-set_left_node = build_tree(array, a_start, mid - 1) 
-set_right_node = build_tree(array, mid + 1, a_end)
-return level 1 root node
-=end
 
 array = Array.new(15) {rand (0..500)}
