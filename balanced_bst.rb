@@ -117,6 +117,22 @@ end
 		end
 	end
 
+	def level_order(root = @root)
+		if root == nil
+			puts "Tree is empty"
+		else
+			q = [root]
+			v = []
+			while q.empty? == false
+				current = q.shift
+				q << current.left unless current == nil
+				q << current.right unless current == nil
+				v << current
+			end
+			return v
+		end
+	end
+
 	def insert(key, root = @root)
 		if root == nil
 			return Node.new(key)
