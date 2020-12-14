@@ -6,7 +6,7 @@
 
 3. Write a #build_tree method which takes an array of data (e.g. [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]) and turns it into a balanced binary tree full of Node objects appropriately placed (don’t forget to sort and remove duplicates!). The #build_tree method should return the level-1 root node. - x
 
-4. Write an #insert and #delete method which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not). 
+4. Write an #insert and #delete method which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not).  - X
 
 5. Write a #find method which accepts a value and returns the node with the given value.  - X
 
@@ -50,21 +50,15 @@ def reload
 	load 'balanced_bst.rb'
 end
 
-def pretty_print(node = @root, prefix = '', is_left = true)
-  pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-  puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-  pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-end
-
 
 class Node 
-	attr_accessor :data, :left_child, :right_child
+	attr_accessor :data, :left, :right
 	include Comparable
 
 	def initialize(data)
 		@data = data
-		@left_child = nil
-		@right_child = nil
+		@left = nil
+		@right = nil
 	end
 
 	def <=>(other_data)
@@ -86,14 +80,20 @@ class Tree
 		else
 			mid = (first + last)/2
 			new_node = Node.new(arr[mid])
-			new_node.left_child = build_tree(arr, first, (mid - 1))
-			new_node.right_child = build_tree(arr, (mid + 1), last)  
+			new_node.left = build_tree(arr, first, (mid - 1))
+			new_node.right = build_tree(arr, (mid + 1), last)  
 			new_node
 		end
 	end
 
+	def pretty_print(node = @root, prefix = '', is_left = true)
+		pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+  puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+  pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+end
+
 	def leaf?(n)
-		if n.left_child == nil && n.right_child == nil
+		if n.left == nil && n.right == nil
 		true
 		else
 		false
@@ -107,10 +107,10 @@ class Tree
 			if key == node.data
 				puts "node found"
 				return node
-			elsif key >= node.data
-				find(key, node.right_child)
-			elsif key <= node.data
-				find(key, node.left_child)
+			elsif key > node.data
+				find(key, node.right)
+			elsif key < node.data
+				find(key, node.left)
 			else
 				puts "I do not understand."
 			end
@@ -126,13 +126,85 @@ class Tree
 		end
 
 		if root.data > key
-			root.left_child = insert(key, root.left_child)
+			root.left = insert(key, root.left)
 		else
-			root.right_child = insert(key, root.right_child)
+			root.right = insert(key, root.right)
 		end
 		root
 	end
+
+	def inorder_successor(root)
+		current = root
+		while current.left != nil
+			current = current.left
+		end
+		current
+	end
+
+	def delete(key, root = @root)
+		return root if root == nil
+
+		if key < root.data
+			root.left = delete(key, root.left)
+		elsif key > root.data
+			root.right = delete(key, root.right)
+		else			
+			if root.left == nil
+				temp = root.right
+				root = nil
+				return temp			
+			elsif root.right == nil
+				temp = root.left
+				root = nil
+				return temp
+			else
+				temp = inorder_successor(root.right)
+			  root.data = temp.data
+			  root.right = delete(temp.data, root.right)
+			end			
+		end
+		return root
+	end
 end
+
+
+
+
+
+
+
+
+				
+# If the key to be deleted 
+    # is smaller than the root's
+    # key then it lies in  left subtree
+
+# If the kye to be delete 
+    # is greater than the root's key
+    # then it lies in right subtree
+
+# If key is same as root's key, then this is the node
+    # to be deleted
+
+# Node with two children: 
+        # Get the inorder successor
+        # (smallest in the right subtree)
+
+# Copy the inorder successor's 
+        # content to this node
+
+
+# Delete the inorder successor
+
+
+
+
+
+
+
+
+
+
 
 
 
