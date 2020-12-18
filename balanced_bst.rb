@@ -10,7 +10,7 @@
 
 5. Write a #find method which accepts a value and returns the node with the given value.  - X
 
-6. Write a #level_order method that returns an array of values. This method should traverse the tree in breadth-first level order. This method can be implemented using either iteration or recursion (try implementing both!). Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list (as you saw in the video).
+6. Write a #level_order method that returns an array of values. This method should traverse the tree in breadth-first level order. This method can be implemented using either iteration or recursion (try implementing both!). Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list (as you saw in the video). - X
 
 7. Write #inorder, #preorder, and #postorder methods that returns an array of values. Each method should traverse the tree in their respective depth-first order.
 
@@ -125,13 +125,30 @@ end
 			v = []
 			while q.empty? == false
 				current = q.shift
-				q << current.left unless current == nil
-				q << current.right unless current == nil
+				q << current.left unless current.left == nil
+				q << current.right unless current.right == nil
 				v << current
 			end
 			return v
 		end
 	end
+
+	#inorder (LNR)
+
+	def inorder(root = @root, array =[])  
+		return array if root == nil
+
+		inorder(root.left, array)
+		array << root.data
+		inorder(root.right, array)
+	end
+
+	#preorder
+
+	#postorder
+
+
+
 
 	def insert(key, root = @root)
 		if root == nil
