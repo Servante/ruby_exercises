@@ -133,9 +133,7 @@ end
 		end
 	end
 
-	#inorder (LNR)
-
-	def inorder(root = @root, array =[])  
+	def inorder(root = @root, array = [])  
 		return array if root == nil
 
 		inorder(root.left, array)
@@ -143,12 +141,21 @@ end
 		inorder(root.right, array)
 	end
 
-	#preorder
+	def preorder(root = @root, array = [])
+		return array if root == nil
 
-	#postorder
+		array << root.data
+		preorder(root.left, array)
+		preorder(root.right, array)
+	end	
 
+	def postorder(root = @root, array = [])
+		return array if root == nil
 
-
+		postorder(root.left, array)
+		postorder(root.right, array)
+		array << root.data		
+	end	
 
 	def insert(key, root = @root)
 		if root == nil
