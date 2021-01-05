@@ -12,9 +12,9 @@
 
 6. Write a #level_order method that returns an array of values. This method should traverse the tree in breadth-first level order. This method can be implemented using either iteration or recursion (try implementing both!). Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list (as you saw in the video). - X
 
-7. Write #inorder, #preorder, and #postorder methods that returns an array of values. Each method should traverse the tree in their respective depth-first order.
+7. Write #inorder, #preorder, and #postorder methods that returns an array of values. Each method should traverse the tree in their respective depth-first order. -X
 
-8. Write a #height method which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
+8. Write a #height method which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node. - X
 
 9. Write a #depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
 
@@ -88,9 +88,9 @@ class Tree
 
 	def pretty_print(node = @root, prefix = '', is_left = true)
 		pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-  puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-  pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-end
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
 
 	def leaf?(n)
 		if n.left == nil && n.right == nil
@@ -205,47 +205,13 @@ end
 		end
 		return root
 	end
+
+	def height(node = root)
+		return -1 if node.nil?
+		[height(node.left) , height(node.right)].max + 1
+	end
 end
 
 
-
-
-
-
-
-
-				
-# If the key to be deleted 
-    # is smaller than the root's
-    # key then it lies in  left subtree
-
-# If the kye to be delete 
-    # is greater than the root's key
-    # then it lies in right subtree
-
-# If key is same as root's key, then this is the node
-    # to be deleted
-
-# Node with two children: 
-        # Get the inorder successor
-        # (smallest in the right subtree)
-
-# Copy the inorder successor's 
-        # content to this node
-
-
-# Delete the inorder successor
-
-
-
-
-
-
-
-
-
-
-
-
-
 array = Array.new(15) {rand (0..500)}
+
