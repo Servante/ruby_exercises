@@ -18,7 +18,7 @@
 
 9. Write a #depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node X
 
-10. Write a #balanced? method which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
+10. Write a #balanced? method which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1. - X
 
 11. Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to create a level-order array of the tree before passing the array back into the #build_tree method.
 
@@ -233,8 +233,21 @@ class Tree
 
 		false
 
-		end
-				
+	end
+
+	def rebalance
+		array = self.level_order
+		value_array = array.collect {|node| node.data}
+		return Tree.new(value_array)
+
+	end
+
+	
+
+
+
+
+
 
 
 
