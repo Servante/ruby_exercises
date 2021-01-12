@@ -1,55 +1,6 @@
-=begin
-
-1. Build a Node class. It is should have attributes for the data it stores as well as its left and right children. As a bonus, try including the Comparable module and make nodes compare using their data attribute.  - x
-
-2. Build a Tree class which accepts an array when initialized. The Tree class should have a root attribute which uses the return value of #build_tree which you’ll write next. - x
-
-3. Write a #build_tree method which takes an array of data (e.g. [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]) and turns it into a balanced binary tree full of Node objects appropriately placed (don’t forget to sort and remove duplicates!). The #build_tree method should return the level-1 root node. - x
-
-4. Write an #insert and #delete method which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not).  - X
-
-5. Write a #find method which accepts a value and returns the node with the given value.  - X
-
-6. Write a #level_order method that returns an array of values. This method should traverse the tree in breadth-first level order. This method can be implemented using either iteration or recursion (try implementing both!). Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list (as you saw in the video). - X
-
-7. Write #inorder, #preorder, and #postorder methods that returns an array of values. Each method should traverse the tree in their respective depth-first order. -X
-
-8. Write a #height method which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node. - X
-
-9. Write a #depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node X
-
-10. Write a #balanced? method which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1. - X
-
-11. Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to create a level-order array of the tree before passing the array back into the #build_tree method.
-
-12. Write a simple driver script that does the following:
-
-1. Create a binary search tree from an array of random numbers (`Array.new(15) { rand(1..100) }`)
-2. Confirm that the tree is balanced by calling `#balanced?`
-3. Print out all elements in level, pre, post, and in order
-4. try to unbalance the tree by adding several numbers > 100
-5. Confirm that the tree is unbalanced by calling `#balanced?`
-6. Balance the tree by calling `#rebalance`
-7. Confirm that the tree is balanced by calling `#balanced?`
-8. Print out all elements in level, pre, post, and in order
-
-
-Tip: If you would like to visualize your binary search tree, here is a #pretty_print method that a student wrote and shared on Discord:
-
-def pretty_print(node = @root, prefix = '', is_left = true)
-  pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-  puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-  pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-end
-
-=end
-
-require "pry"
-
 def reload
 	load 'balanced_bst.rb'
 end
-
 
 class Node 
 	attr_accessor :data, :left, :right
@@ -92,14 +43,6 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-	def leaf?(n)
-		if n.left == nil && n.right == nil
-		true
-		else
-		false
-		end 
-	end
-
 	def find(key, node = @root)
 		if node == nil
 			puts "no nodes found"
@@ -131,6 +74,12 @@ class Tree
 			end
 			return v
 		end
+	end
+
+	def level_order_print
+		array = self.level_order
+		array.each {|node| puts node.data}
+		return nil
 	end
 
 	def inorder(root = @root, array = [])  
@@ -182,7 +131,7 @@ class Tree
 	end
 
 	def delete(key, root = @root)
-		return root if root == nil
+		return root if root.nil?
 
 		if key < root.data
 			root.left = delete(key, root.left)
@@ -232,29 +181,64 @@ class Tree
 		return true if (lheight - rheight).abs <= 1 && balanced?(root.left) && balanced?(root.right)
 
 		false
-
 	end
 
 	def rebalance
 		array = self.level_order
 		value_array = array.collect {|node| node.data}
 		return Tree.new(value_array)
-
 	end
-
-	
-
-
-
-
-
-
-
-
-
 end
 
 
-array = Array.new(15) {rand (0..500)}
+#driver_script
+
+# 1. Create a binary search tree from an array of random numbers (`Array.new(15) { rand(1..100) }`)
+array = Array.new(15) {rand (0..100)}
+bst = Tree.new(array)
+bst.pretty_print
+# 2. Confirm that the tree is balanced by calling `#balanced?`
+puts "is tree balanced?"
+puts bst.balanced?
+# 3. Print out all elements in level, pre, post, and in order
+puts "all elements in level order:"
+bst.level_order_print
+puts "all elements in preorder:"
+bst.preorder.each {|v| puts v}
+puts "all elements in postorder:"
+bst.postorder.each {|v| puts v}
+puts "all elements inorder:"
+bst.inorder.each {|v| puts v}
+# 4. try to unbalance the tree by adding several numbers > 100
+bst.insert(920)
+bst.insert(777)
+bst.insert(390)
+bst.pretty_print
+# 5. Confirm that the tree is unbalanced by calling `#balanced?`
+puts "is tree balanced?"
+puts bst.balanced?
+# 6. Balance the tree by calling `#rebalance`
+new_bst = bst.rebalance
+puts "rebalanced"
+new_bst.pretty_print
+# 7. Confirm that the tree is balanced by calling `#balanced?`
+puts "is tree balanced?"
+puts new_bst.balanced?
+# 8. Print out all elements in level, pre, post, and in order
+puts "all elements in level order:"
+new_bst.level_order_print
+puts "all elements in preorder:"
+new_bst.preorder.each {|v| puts v}
+puts "all elements in postorder:"
+new_bst.postorder.each {|v| puts v}
+puts "all elements inorder:"
+new_bst.inorder.each {|v| puts v}
+
+
+
+
+
+
+
 
 
