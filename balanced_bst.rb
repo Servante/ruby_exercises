@@ -16,7 +16,7 @@
 
 8. Write a #height method which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node. - X
 
-9. Write a #depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
+9. Write a #depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node X
 
 10. Write a #balanced? method which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
 
@@ -206,12 +206,42 @@ class Tree
 		return root
 	end
 
-	def height(node = root)
+	def height(node = @root)
 		return -1 if node.nil?
 		[height(node.left) , height(node.right)].max + 1
 	end
+
+	def depth(key, root = @root, counter = nil)
+		if key == root
+			return 0
+		elsif key < root.data
+			depth(key, root.left) + 1
+		elsif key > root.data
+			depth(key, root.right) + 1
+		else
+			puts "unable to locate node"
+		end
+	end
+
+	def balanced?(root = @root)
+		return true if root.nil?
+
+		lheight = height(root.left)
+		rheight = height(root.right)
+
+		return true if (lheight - rheight).abs <= 1 && balanced?(root.left) && balanced?(root.right)
+
+		false
+
+		end
+				
+
+
+
+
 end
 
 
 array = Array.new(15) {rand (0..500)}
+
 
