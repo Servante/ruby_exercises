@@ -1,3 +1,4 @@
 # Odin-Projects
 
-A place for all Odin related projects and exercises.
+Ruby Exercises from the ODIN Project curriculum
+
