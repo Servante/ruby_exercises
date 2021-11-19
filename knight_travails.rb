@@ -47,7 +47,7 @@
 	#puts "you've reached your destination in #{}moves."
 	#output the move and index
 
-
+require 'pry'
 
 def reload
 	load 'knight_travails.rb'
@@ -61,12 +61,18 @@ end
 
 class Board
 
-	def knight_travails(location, destination)
+	def knight_travails(location, target)  
 	 @alpha_knight = Knight.new(location)
-	 create_tree(destination, queue = [@alpha_knight])
+	 create_tree(target, queue = [@alpha_knight])
+	 path = find_path(location, destination)
+	 puts "Your path is:"
+	 path.each_with_index do |index, move|
+	 	puts "[#{index}, #{move}]"
+	 end
 	end
 
-	def create_tree(queue = [@alpha_knight], index = 0)
+	def create_tree(target, queue = [@alpha_knight], index = 0)
+		#binding.pry
 		current = queue[index]
 		create_children(current)
 
@@ -82,46 +88,49 @@ class Board
 	end
 
 	def create_children(knight)
-		
-
+		knight.moves.each do |move|
+			child = find_child(move).nil? ? Knight.new(move) : find_child(move)
+			knight.children << child
+		end
 	end
 
-	def find_child
+	def find_child(target, queue = [@alpha_knight], index = 0)
+		current = queue[index]
+		found_knight = nil
+		return nil if current.nil?
+		current.children.each do |child|
+			queue << child unless queue.include?(child)
+			found_knight = child if child.location == target
+		end
+		binding.pry
+		return found_knight unless found_knight.nil?
+		index += 1
 
+		find_child(target, queue, index)
+	end
+
+	def find_path(target, path = [target])
+		parent = find_parent(target)
+		path << parent.location
+		return path if parent == @alpha_knight
+
+		find_parent(target, path)
+	end
+
+	def find_parent(target, queue = [@alpha], index = 0)
+		current = queue[index]
+		parent = current.moves.any?(target)
+		return if current.nil?
+		return current if parent == true
+
+		current.children.each do |child|
+			queue << child unless queue.include?(child)
+		end
+
+		index += 1
+		find_parent(target, queue, index)
 	end
 end
-
-
-
-#binary search tree is created of knights(locations) with their possible moves as children
-	#creates family(dest, queue = [@alpha], index = 0)
-		#sets current variable with queue[index]
-		#creates children(current)
-			#iterates through current.moves
-				#child = knight(move) if find_child(move) is nil else find_child(move)
-					#find_child(dest, queue[@alph], index = 0)
-					#set current variable 
-					#set found_knight = nil
-					#iterate through current.children
-						#pass child to queue unless queue includes child
-						#found_knight = child if child.location == destination
-					#return found_knight if found_knight is not nil
-					#index += 1
-					#find_child(destination, queue, index)
-				#new child is passed to current.children
-		#iterates through current.children
-			#passes child to queue unless queue.include child
-
-		#returns if current == find_child(destination)
-		#returns if index >= 66
-
-		#index += 1
-		#create_family(dest, queue = [@alpha], index)
-
-
-
-
-
 
 #knight   
 
