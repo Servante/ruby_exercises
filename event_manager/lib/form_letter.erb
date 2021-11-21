@@ -1,0 +1,40 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Thank You!</title>
+</head>
+<body>
+  <h1>Thanks <%= name %> </h1>
+  <p>Thanks for coming to our conference.  We couldn't have done it without you!</p>
+
+  <p>
+    Political activism is at the heart of any democracy and your voice needs to be heard.
+    Please consider reaching out to your following representatives:
+  </p>
+
+  <table>
+    <% if legislators.kind_of?(Array) %>
+      <th>Name</th><th>Website</th>
+        <% legislators.each do |legislator| %>
+        <tr>
+          <td><%= "#{legislator.name}" %></td>
+          <td><%= "#{legislator.urls.join}" unless legislator.urls.nil? %></td>
+        </tr>
+        <% end %>
+    <% else%>
+      <th></th>
+      <td><%= "#{legislators}" %></td>
+    <% end %>
+  </table>
+
+  <% if phone == nil %>
+    <p>
+      Please contact your closest office or visit our website to add your phone number for important updates relating to your district.
+    </p>
+  <% else %>
+    <p>
+      According to our records, your current phone number is:<%= phone %>, if you would like to receive updates related to your district do nothing. You will be instantly notified of breaking events. If you would like to opt out, simply respond "STOP" to any text you receive.
+    </p> 
+  <% end %>
+</body>
+</html>
