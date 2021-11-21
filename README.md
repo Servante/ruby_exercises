@@ -12,7 +12,7 @@ These exercises are from [The Odin Project](https://www.theodinproject.com/cours
 [merge_sort](https://www.theodinproject.com/courses/ruby-programming/lessons/recursion)
 
 ## Computer Science section
-[binary_search_tree](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms)\
+[binary_search_tree](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms)
 [linked_list](https://www.theodinproject.com/courses/ruby-programming/lessons/linked-lists)\
 [knight_travails](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms)
 
