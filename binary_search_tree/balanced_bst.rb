@@ -1,8 +1,8 @@
-def reload
+def reload  #delete
 	load 'balanced_bst.rb'
 end
 
-class Node 
+class Node  #move to node.rb
 	attr_accessor :data, :left, :right
 	include Comparable
 
@@ -17,7 +17,7 @@ class Node
 	end
 end
 
-class Tree
+class Tree #move to tree.rb
 	attr_accessor :root, :arr
 
 	def initialize (arr)

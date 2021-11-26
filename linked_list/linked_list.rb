@@ -1,3 +1,5 @@
+require_relative 'node'
+
 class LinkedList
 	attr_accessor :head, :tail
 	include Enumerable
