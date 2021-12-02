@@ -3,7 +3,7 @@
 
 Build the following methods in your linked list class:
 
-1. #append(value) adds a new node containing value to the end of the list
+1. #append(value) adds a new node containing value to the end of the list - x
 
 2. #prepend(value) adds a new node containing value to the start of the list
 
@@ -27,7 +27,7 @@ EC
 
 11. #insert_at(value, index) that inserts a new node with the provided value at the given index.
 
-12. #remove_at(index) that removes the node at the given index.
+12. #remove_at(index) that removes the node at the given index.ls
 
 
 =end
@@ -36,7 +36,7 @@ EC
 require_relative "node.rb"
 require 'pry'
 
-def reload
+def reload  #irb helper
 	load 'linked_list.rb'
 end
 
@@ -49,14 +49,25 @@ class LinkedList
 		@tail = nil
 	end
 
+	def empty_list(value) #assigns value to head/tail if list is empty
+		@head = value ; @tail = value		
+	end
+
 	def append(value)
 		if @head.nil?
-			@head = value ; @tail = value
+			empty_list(value)
 		else
 			@tail.next_node = value ; @tail = value
 		end
 	end
 
+	def prepend(value)
+		if @head.nil?
+			empty_list(value)
+		else
+			@head.next_node = value ; @head = value
+		end
+	end
 end
 
 
