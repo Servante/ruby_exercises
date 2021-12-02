@@ -33,8 +33,13 @@ EC
 =end
 
 
-require relative "node"
-include pry
+require_relative "node.rb"
+require 'pry'
+
+def reload
+	load 'linked_list.rb'
+end
+
 
 class LinkedList
 	attr_accessor :head, :tail
@@ -43,6 +48,15 @@ class LinkedList
 		@head = nil
 		@tail = nil
 	end
+
+	def append(value)
+		if @head.nil?
+			@head = value ; @tail = value
+		else
+			@tail.next_node = value ; @tail = value
+		end
+	end
+
 end
 
 
