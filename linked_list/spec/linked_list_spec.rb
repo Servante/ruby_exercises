@@ -6,108 +6,57 @@ require_relative '../node'
 
 
 describe LinkedList do 
+	subject(:linked_list) {LinkedList.new}
+	let(:node) {Node.new(7)}
+	let(:second_node) {Node.new(8)}
 
+	describe '#append' do		
 
-	describe '#empty_list' do
-		subject(:list) {described_class.new}
-		let(:empty_list_node) {Node.new(7)}
+		context 'when appending to an empty list' do
 
-		context 'when you append a node to an empty list' do
-
-			before do 
-				list.append(:empty_list_node)
-			end
-
-			it 'attaches the node to the head' do
-				expect(list.head).to be(:empty_list_node)
-			end
-
-			it 'and attaches itself to the tail' do
-				expect(list.tail).to be(:empty_list_node)
+			it 'sets itself as both tail and head' do
+				linked_list.append(node)
+				expect(linked_list.head).to be(node)
+				expect(linked_list.tail).to be(node)
 			end
 		end
 
-		context 'when you prepend a node to an empty list' do
+		context 'when appending to a populated list' do
 
 			before do 
-				list.prepend(:empty_list_node)
+				linked_list.append(node)
 			end
 
-			it 'attaches the node to the head' do
-				expect(list.head).to be(:empty_list_node)
-			end
-
-			it 'and sets itself to the tail' do
-				expect(list.tail).to be(:empty_list_node)
+			it 'sets itself as tail and sets prev tail.next_node to itself' do
+				linked_list.append(second_node)
+				expect(linked_list.tail).to be(second_node)
+				expect(linked_list.head.next_node).to be(second_node)
 			end
 		end
 	end
 
+	describe '#prepend' do
 
+		context 'when prepending to an empty list' do
+			
+			it 'sets itself as both head and tail' do
+				linked_list.prepend(node)
+				expect(linked_list.head).to be(node)
+				expect(linked_list.tail).to be(node)
+			end
+		end
 
+		context 'when prepending to a poplulated list' do
 
+			before do
+				linked_list.prepend(node)
+			end
 
-
-
-
-	# describe '#append' do
-	# 	subject(:list) {described_class.new}		
-	# 	let(:append_node) {Node.new(7)}
-
-	# 	before do
-	# 		list.append(:append_node)
-	# 	end
-
-	# 	context 'when you append a node to an empty list' do
-	# 		xit 'attaches the node to the head' do
-	# 			expect(list.head).to be(:append_node)
-	# 		end
-
-	# 		xit 'and it sets the new node to the tail' do
-	# 			expect(list.tail).to be(:append_node)
-	# 		end
-	# 	end
-
-		#need 2 tests for when it attaches to the tail
-
-
-
-
-	# end
-
-	# describe '#prepend' do
-	# 	subject(:list) {described_class.new}
-	# 	let(:prepend_node) {Node.new(7)}
-
-	# 	context 'When you prepend a node to an empty list' do			
-	# 		before do 
-	# 			list.prepend(:prepend_node)
-	# 		end
-
-	# 		xit 'attaches the node to the head' do
-	# 			expect(list.head).to be(:prepend_node)
-	# 		end
-
-	# 		xit 'and it sets the node to the tail' do
-	# 			expect(list.tail).to be(:prepend_node)
-	# 		end
-	# 	end
-
-	# 	context 'when prepending to an existing list' do
-
-	# 	end
-
-
-		
-
-
-
-	# end
-
-
-
-
-
-
-
+			it 'it sets its next_next node to current head, and set itself as head ' do
+				linked_list.prepend(second_node)
+				expect(linked_list.head.next_node).to be(node)
+				expect(linked_list.head).to be(second_node)
+			end
+		end
+	end
 end

@@ -65,7 +65,7 @@ class LinkedList
 		if @head.nil?
 			empty_list(value)
 		else
-			@head.next_node = value ; @head = value
+			value.next_node = @head ; @head = value
 		end
 	end
 end
