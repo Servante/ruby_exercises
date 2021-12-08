@@ -59,4 +59,25 @@ describe LinkedList do
 			end
 		end
 	end
+
+	describe '#size' do
+
+		context 'when size is called on the linked_list' do
+			subject(:list_size) {described_class.new}
+
+			before do
+				n1 = Node.new("7")
+				n2 = Node.new("8")
+				n3 = Node.new("9")
+				list_size.append(n1)
+				list_size.append(n2)
+				list_size.append(n3)
+			end
+
+			it 'returns a count of all the nodes in the list' do
+				count = list_size.size
+				expect(count).to eq(2)
+			end
+		end
+	end
 end

@@ -5,7 +5,7 @@ Build the following methods in your linked list class:
 
 1. #append(value) adds a new node containing value to the end of the list - x
 
-2. #prepend(value) adds a new node containing value to the start of the list
+2. #prepend(value) adds a new node containing value to the start of the list - x
 
 3. #size returns the total number of nodes in the list
 
@@ -49,6 +49,15 @@ class LinkedList
 		@tail = nil
 	end
 
+	def each
+		return nil if @head.nil?
+		entry = @head
+		until entry.nil?
+			yield entry
+			entry = entry.next_node
+		end
+	end
+
 	def empty_list(value) #assigns value to head/tail if list is empty
 		@head = value ; @tail = value		
 	end
@@ -68,6 +77,10 @@ class LinkedList
 			value.next_node = @head ; @head = value
 		end
 	end
+
+	def size(node = @head, counter = 1) #good job on the recursion, but rewrite in a separate		
+		
+	end	
 end
 
 
