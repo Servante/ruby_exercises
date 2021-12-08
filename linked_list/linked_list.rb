@@ -58,10 +58,6 @@ class LinkedList
 		end
 	end
 
-	def empty_list(value) #assigns value to head/tail if list is empty
-		@head = value ; @tail = value		
-	end
-
 	def append(value)
 		if @head.nil?
 			empty_list(value)
@@ -78,8 +74,11 @@ class LinkedList
 		end
 	end
 
-	def size(node = @head, counter = 1) #good job on the recursion, but rewrite in a separate		
-		
+	def size
+		return nil if @head.nil?
+		counter = 0
+		self.each {counter += 1}
+		return counter		
 	end	
 end
 

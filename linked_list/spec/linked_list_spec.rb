@@ -76,7 +76,7 @@ describe LinkedList do
 
 			it 'returns a count of all the nodes in the list' do
 				count = list_size.size
-				expect(count).to eq(2)
+				expect(count).to eq(3)
 			end
 		end
 	end
