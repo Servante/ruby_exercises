@@ -106,23 +106,23 @@ describe LinkedList do
 		end
 	end
 
-	# describe '#at' do
+	describe '#at' do
 
-	# 	subject(:traversal_list) {described_class.new} 
+		subject(:traversal_list) {described_class.new} 
 
-	# 	before do 
-	# 		n1 = Node.new("7")
-	# 		n2 = Node.new("8")
-	# 		list_size.append(n1)
-	# 		list_size.append(n2)
-	# 	end
+		before do 
+			n1 = Node.new("7")
+			n2 = Node.new("8")
+			traversal_list.append(n1)
+			traversal_list.append(n2)
+		end
 
-	# 	context 'when given a valid index of 1' do
+		context 'when given a valid index of 1' do
 
-	# 		it 'returns the value of node at index 1("8")' do
-	# 			returned_value = traversal_list.at(1)
-	# 			expect(returned_value).to be("8")
-	# 		end
-	# 	end
-	# end
+			it 'returns the value of node at index 1("8")' do
+				returned_value = traversal_list.at(1)
+				expect(returned_value).to be("8")
+			end
+		end
+	end
 end

@@ -7,7 +7,7 @@ Build the following methods in your linked list class:
 
 2. #prepend(value) adds a new node containing value to the start of the list - x
 
-3. #size returns the total number of nodes in the list
+3. #size returns the total number of nodes in the list - x
 
 4. #head returns the first node in the list
 
@@ -91,6 +91,11 @@ class LinkedList
 
 	def tail
 		@tail
+	end
+
+	def at(index)
+		
+
 	end
 end
 
