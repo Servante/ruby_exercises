@@ -80,4 +80,49 @@ describe LinkedList do
 			end
 		end
 	end
+
+	describe '#head and #tail' do
+		subject(:getters_list) {described_class.new}
+
+		before do 
+			n1 = Node.new("A")
+			n2 = Node.new("B")
+			getters_list.append(n1)
+			getters_list.append(n2)
+		end
+
+		context 'when the head method is called' do
+			it 'returns the head of the list' do
+				head = getters_list.head
+				expect(head).to be(getters_list.head)
+			end
+
+			context 'when the tail method is called' do
+				it 'returns the tail of the list' do
+					tail = getters_list.tail
+					expect(tail).to be(getters_list.tail)
+				end
+			end
+		end
+	end
+
+	# describe '#at' do
+
+	# 	subject(:traversal_list) {described_class.new} 
+
+	# 	before do 
+	# 		n1 = Node.new("7")
+	# 		n2 = Node.new("8")
+	# 		list_size.append(n1)
+	# 		list_size.append(n2)
+	# 	end
+
+	# 	context 'when given a valid index of 1' do
+
+	# 		it 'returns the value of node at index 1("8")' do
+	# 			returned_value = traversal_list.at(1)
+	# 			expect(returned_value).to be("8")
+	# 		end
+	# 	end
+	# end
 end
