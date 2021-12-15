@@ -13,7 +13,7 @@ Build the following methods in your linked list class:
 
 5. #tail returns the last node in the list - x
 
-6. #at(index) returns the node at the given index
+6. #at(index) returns the node at the given index - x
 
 7. #pop removes the last element from the list
 
@@ -99,6 +99,18 @@ class LinkedList
 			return node if counter == index
 			counter += 1
 		end
+	end
+
+	def pop
+
+		if self.size.nil?
+			puts "The list is empty."
+		elsif @head == @tail
+			@head = nil ; @tail = nil
+		else
+			@tail = self.at(self.size - 2) ; @tail.next_node = nil
+		end
+		return self
 	end
 end
 

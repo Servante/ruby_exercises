@@ -52,7 +52,7 @@ describe LinkedList do
 				linked_list.prepend(node)
 			end
 
-			it 'it sets its next_next node to current head, and set itself as head ' do
+			it 'sets its next_next node to current head, and set itself as head ' do
 				linked_list.prepend(second_node)
 				expect(linked_list.head.next_node).to be(node)
 				expect(linked_list.head).to be(second_node)
@@ -122,6 +122,40 @@ describe LinkedList do
 			it 'returns the value of node at index 1("8")' do
 				returned_value = traversal_list.at(1)
 				expect(returned_value.value).to be("8")
+			end
+		end
+	end
+
+	describe '#pop' do
+
+		before do 
+			
+		end
+
+		context 'when pop is used on a populated list' do
+			it 'assigns the node before the tail as the tail' do
+				linked_list.append(node)
+			  linked_list.append(second_node)
+				modified_list = linked_list.pop
+				expect(modified_list.tail).to be(node)
+			end
+		end
+
+		context 'when pop is used on an empty list' do
+			it 'returns a message stating the list is empty' do
+				message = "The list is empty."
+				# binding.pry
+				expect(linked_list).to receive(:puts).with(message)
+				linked_list.pop
+			end
+		end
+
+		context 'when pop is called on a list with only one node' do
+			it 'it assigns both head and tail as nil' do
+				linked_list.append(node)
+				# binding.pry
+				mod_list = linked_list.pop
+				expect(mod_list.size).to be_nil
 			end
 		end
 	end
