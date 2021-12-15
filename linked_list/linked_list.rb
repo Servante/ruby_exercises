@@ -9,9 +9,9 @@ Build the following methods in your linked list class:
 
 3. #size returns the total number of nodes in the list - x
 
-4. #head returns the first node in the list
+4. #head returns the first node in the list - x
 
-5. #tail returns the last node in the list
+5. #tail returns the last node in the list - x
 
 6. #at(index) returns the node at the given index
 
@@ -94,8 +94,11 @@ class LinkedList
 	end
 
 	def at(index)
-		
-
+		counter = 0
+		self.each do |node|
+			return node if counter == index
+			counter += 1
+		end
 	end
 end
 

@@ -121,7 +121,7 @@ describe LinkedList do
 
 			it 'returns the value of node at index 1("8")' do
 				returned_value = traversal_list.at(1)
-				expect(returned_value).to be("8")
+				expect(returned_value.value).to be("8")
 			end
 		end
 	end
