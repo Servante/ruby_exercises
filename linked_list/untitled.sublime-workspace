@@ -1,0 +1,732 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"player",
+				"player"
+			],
+			[
+				"node",
+				"node"
+			],
+			[
+				"save",
+				"save_decrypted_messages"
+			],
+			[
+				"display",
+				"display_turn_order"
+			],
+			[
+				"invali",
+				"invalid_input02"
+			],
+			[
+				"instance",
+				"instance_variable_get"
+			],
+			[
+				"random",
+				"random_number"
+			],
+			[
+				"game",
+				"game_guessing"
+			],
+			[
+				"do",
+				"do"
+			],
+			[
+				"bst",
+				"bst"
+			],
+			[
+				"level_",
+				"level_order_print"
+			],
+			[
+				"level",
+				"level_order"
+			],
+			[
+				"left",
+				"left"
+			],
+			[
+				"data",
+				"data"
+			],
+			[
+				"inorder",
+				"inorder_successor"
+			],
+			[
+				"b",
+				"bm-\tBenchmark.bmbm do .. end"
+			],
+			[
+				"voy",
+				"voy"
+			],
+			[
+				"rando",
+				"random_word"
+			],
+			[
+				"play",
+				"player_name"
+			],
+			[
+				"load",
+				"load_game"
+			],
+			[
+				"remain",
+				"remaining_attempts"
+			],
+			[
+				"guesses",
+				"guesses_remaining"
+			],
+			[
+				"guess",
+				"guess_history"
+			],
+			[
+				"feeback",
+				"feedback_report_day"
+			],
+			[
+				"feedback_report",
+				"feedback_report_hours"
+			],
+			[
+				"reg",
+				"reg_date_array"
+			],
+			[
+				"feedback",
+				"feedback_report_hours"
+			],
+			[
+				"erb",
+				"erb_template_hours"
+			],
+			[
+				"bot",
+				"bot_random_guess"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"v",
+				"v"
+			],
+			[
+				"cre",
+				"create_shield"
+			],
+			[
+				"yes",
+				"yes"
+			],
+			[
+				"CODE",
+				"CODE_PEGS"
+			],
+			[
+				"start",
+				"start"
+			],
+			[
+				"arr",
+				"arr"
+			],
+			[
+				"to",
+				"to_msgpack"
+			],
+			[
+				"string",
+				"strings"
+			],
+			[
+				"name",
+				"name"
+			],
+			[
+				"true",
+				"true"
+			],
+			[
+				"connection",
+				"connections_exist"
+			],
+			[
+				"show",
+				"show_connections"
+			],
+			[
+				"sho",
+				"show_exits"
+			],
+			[
+				"show_c",
+				"show_current_exits"
+			],
+			[
+				"exits",
+				"exits"
+			],
+			[
+				"def",
+				"def\tdef … end"
+			],
+			[
+				"rest",
+				"RestClient"
+			],
+			[
+				"my",
+				"my_downloaded_page"
+			],
+			[
+				"remote",
+				"remote_full_url"
+			],
+			[
+				"arry",
+				"arry"
+			],
+			[
+				"number",
+				"number_of_spawn"
+			],
+			[
+				"up",
+				"up"
+			],
+			[
+				"count",
+				"count"
+			],
+			[
+				"num",
+				"num"
+			],
+			[
+				"Hash",
+				"hash"
+			],
+			[
+				"Array",
+				"Array\tArray.new(10) { |i| .. }"
+			],
+			[
+				"y",
+				"yield"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"DNA",
+				"DNAtoRNA"
+			],
+			[
+				"yo",
+				"yo"
+			],
+			[
+				"new",
+				"new"
+			],
+			[
+				"block",
+				"block_given"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"base",
+				"baseball_players_array"
+			],
+			[
+				"basebal",
+				"baseball_players"
+			],
+			[
+				"age",
+				"Avenger"
+			],
+			[
+				"li",
+				"line"
+			],
+			[
+				"dec",
+				"text-decoration"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"grid",
+				"gridSquareSize"
+			],
+			[
+				"font",
+				"font-size"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "linked_list.rb",
+			"settings":
+			{
+				"buffer_size": 1863,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node.rb",
+			"settings":
+			{
+				"buffer_size": 145,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spec/linked_list_spec.rb",
+			"settings":
+			{
+				"buffer_size": 2740,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"build",
+				"Build With: Ruby"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 213.199996948,
+		"history":
+		[
+			"rspec",
+			"puts player.location",
+			"puts player",
+			"player",
+			"run"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/lib/game_solution.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/game_spec_solution.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/board_spec_solution.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/14_find_number_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/15a_binary_game_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/14_find_number.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/15a_binary_game.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/linked_list/spec/linked_list_spec.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/linked_list/linked_list.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/linked_list/node.rb",
+		"/home/wesley/Desktop/working_github/original_tic_tac_toe.rb",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/spec/spec_helper.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/spec_helper.rb",
+		"/home/wesley/Desktop/github programs to be added back /original_linked_list.rb",
+		"/home/wesley/web_development/random_st/main.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/README.md",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/binary_search_tree/node.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/binary_search_tree/tree.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/binary_search_tree/main.rb",
+		"/home/wesley/web_development/git_repositories/ruby_exercises/binary_search_tree/balanced_bst.rb",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/tic_tac_toe.rb",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/lib/game_main.rb",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/lib/board.rb",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/lib/player.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/tic_tac_toe.rb",
+		"/home/wesley/Desktop/caesar_cipher_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/tic_tac_toe_refactor.rb",
+		"/home/wesley/Desktop/15a_binary_game_spec.rb",
+		"/home/wesley/web_development/git_repositories/Mastermind_ruby/README.md",
+		"/home/wesley/web_development/git_repositories/Hangman_ruby/README.md",
+		"/home/wesley/web_development/git_repositories/TicTacToe_ruby/README.md",
+		"/home/wesley/Desktop/github programs to be added back /hangman/hangman.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/16a_caesar_breaker_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/16b_caesar_translator_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/16_caesar_main.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/16a_caesar_breaker.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/16b_caesar_translator.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/caesar_cipher.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/16c_database.rb",
+		"/home/wesley/Dropbox/ODIN/questions.txt",
+		"/home/wesley/Dropbox/ODIN/codewars_katas/katas.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/15c_random_number.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/15_binary_main.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/15b_binary_search.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/15b_binary_search_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/15a_binary_game_answer.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/balanced_bst.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/retro_game_tool.rb",
+		"/home/wesley/web_development/programs_complete/briascoder.rb",
+		"/home/wesley/Dropbox/ODIN/code/rando_hacker_film2.rb",
+		"/home/wesley/Dropbox/ODIN/code/rando_hacker_film.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/14_find_number01.rb",
+		"/home/wesley/Dropbox/ODIN/completed_rspecs/14_find_number_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/13_input_output_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/lib/14_find_number.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/13_input_output.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/01_string_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/11b_cat_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/11b_cat.rb",
+		"/home/wesley/Dropbox/ODIN/completed_rspecs/13_input_output_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/13_input_output_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/15a_binary_game_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/practice.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/13_input_output_answer.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/worksheet/working_worksheet.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/worksheet/ruby_worksheet001.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/11a_pet.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/11c_dog.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/12_magic_seven.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/12_magic_seven_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/11a_shared_example_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/11c_dog_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/10_drink_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/10_drink.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_scratchpad.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/09_custom_matcher.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/08_change_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/07_all_contain_exactly_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/08_change_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/06_equality_spec.rb",
+		"/home/wesley/snap/exercism/5/exercism/ruby/hello-world/README.md",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/05_truthy_falsy_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/04_hash_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/03_number_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/03_number_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/02_array_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/01_string_spec.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/worksheet/worksheet.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/14_find_number_answer.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/12_magic_seven_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/16a_caesar_breaker_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/16b_caesar_translator_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/caesar_cipher_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/10_drink_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/caesar_cipher.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/09_custom_matcher_answer.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/02_array_answer.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec_answers/01_string_answer.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/spec/02_array_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/ruby_testing/ruby_testing/README.md",
+		"/home/wesley/Dropbox/ODIN/completed_rspecs/libs/calculator.rb",
+		"/home/wesley/Dropbox/ODIN/completed_rspecs/calculator_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/.rspec",
+		"/home/wesley/Dropbox/ODIN/working_code/caesar_cipher.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/caesar_cipher_rpec.rb",
+		"/home/wesley/Dropbox/ODIN/completed_rspecs/libs/caesar_cipher.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/knight_solution.rb",
+		"/home/wesley/Dropbox/ODIN/odin_projects/knight_travails.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/knight_travails.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/knight_travails.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/Notes/IO_serialization_challenge?s_key.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/knight_mockup.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/lib/calculator.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/spec/calculator_spec.rb",
+		"/home/wesley/Dropbox/ODIN/working_code/knight.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/working_code/balanced_bst_testing.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/linked_list.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/balanced_bst.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/working_code/spec/spec_helper.rb",
+		"/home/wesley/Dropbox/ODIN/Ruby/working_code/balanced_bst.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/balanced_bst_testing.rb",
+		"/home/wesley/Dropbox/ODIN/balanced_bst.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/event_manager/lib/event_manager.rb",
+		"/home/wesley/Dropbox/ODIN/code/text_adventure_working.rb",
+		"/home/wesley/web_development/github/curriculum/ruby_programming/computer_science/project_recursion.md",
+		"/home/wesley/web_development/github/ruby_programming/computer_science/project_recursion.md",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/x.rb",
+		"/home/wesley/web_development/git_repositories/Odin-Projects/fibonacci.rb"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "linked_list.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1863,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "node.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 145,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								145,
+								145
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "spec/linked_list_spec.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2740,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 52.8
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Ruby/Ruby.sublime-build",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 625.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 475.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		]
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 298.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
