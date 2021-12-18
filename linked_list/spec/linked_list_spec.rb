@@ -177,4 +177,28 @@ describe LinkedList do
 			end
 		end
 	end
+
+	describe '#find' do 
+
+		before do
+			linked_list.append(node)
+			linked_list.append(second_node)
+		end
+
+		context 'when given an argument that exists in the list' do
+			it 'returns the index of the node that contains the value' do
+				query = 8
+				returned_index = linked_list.find(query)
+				expect(returned_index).to eq(1)
+			end
+		end
+
+		context 'when given an argument that does not exist in the list' do
+			it 'returns nil' do
+				query = 75
+				returned_index = linked_list.find(query)
+				expect(returned_index).to be_nil
+			end
+		end
+	end
 end

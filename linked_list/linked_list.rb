@@ -17,7 +17,7 @@ Build the following methods in your linked list class:
 
 7. #pop removes the last element from the list - x
 
-8. #contains?(value) returns true if the passed in value is in the list and otherwise returns false.
+8. #contains?(value) returns true if the passed in value is in the list and otherwise returns false. - x
 
 9. #find(value) returns the index of the node containing value, or nil if not found.
 
@@ -57,6 +57,10 @@ class LinkedList
 			entry = entry.next_node
 		end
 	end
+
+	def each_with_index(value)
+	end
+
 
 	def empty_list(value) #assigns value to head/tail if list is empty
 		@head = value ; @tail = value		
@@ -112,10 +116,15 @@ class LinkedList
 		return self
 	end
 
-	def contains?(query)
+	def contains?(value)
 		arr = []
-		self.each {|node| arr << node if node.value == query}
+		self.each {|node| arr << node if node.value == value}
 		arr.empty? ? false : true
+	end
+
+	def find(value)
+		counter = -1
+		self.each {|node|	counter += 1 ; return counter if node.value == value} 
 	end
 end
 
