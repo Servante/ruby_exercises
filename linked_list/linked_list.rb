@@ -27,7 +27,9 @@ EC
 
 11. #insert_at(value, index) that inserts a new node with the provided value at the given index.
 
-12. #remove_at(index) that removes the node at the given index.ls
+12. #remove_at(index) that removes the node at the given index.
+
+13. comment all methods
 
 
 =end
@@ -54,6 +56,17 @@ class LinkedList
 		entry = @head
 		until entry.nil?
 			yield entry
+			entry = entry.next_node
+		end
+	end
+
+	def each_with_index
+		return nil if @head.nil?
+		entry = @head
+		counter = 0
+		until entry.nil?
+			yield entry, counter
+			counter += 1
 			entry = entry.next_node
 		end
 	end
