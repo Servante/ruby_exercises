@@ -19,9 +19,9 @@ Build the following methods in your linked list class:
 
 8. #contains?(value) returns true if the passed in value is in the list and otherwise returns false. - x
 
-9. #find(value) returns the index of the node containing value, or nil if not found.
+9. #find(value) returns the index of the node containing value, or nil if not found. - x
 
-10. #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> nil
+10. #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> nil -- x
 
 EC
 
@@ -57,10 +57,6 @@ class LinkedList
 			entry = entry.next_node
 		end
 	end
-
-	def each_with_index(value)
-	end
-
 
 	def empty_list(value) #assigns value to head/tail if list is empty
 		@head = value ; @tail = value		
@@ -125,6 +121,13 @@ class LinkedList
 	def find(value)
 		counter = -1
 		self.each {|node|	counter += 1 ; return counter if node.value == value} 
+	end
+
+	def to_s
+		array = []
+		self.each {|node| array << "( #{node.value} ) ->" }
+		array << " nil "
+		return array.join(" ")
 	end
 end
 
