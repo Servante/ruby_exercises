@@ -6,14 +6,13 @@ require_relative '../node'
 
 
 describe LinkedList do 
+
 	subject(:linked_list) {LinkedList.new}
 	let(:node) {Node.new(7)}
 	let(:second_node) {Node.new(8)}
 
 	describe '#append' do		
-
 		context 'when appending to an empty list' do
-
 			it 'sets itself as both tail and head' do
 				linked_list.append(node)
 				expect(linked_list.head).to be(node)
@@ -36,7 +35,6 @@ describe LinkedList do
 	end
 
 	describe '#prepend' do
-
 		context 'when prepending to an empty list' do
 			
 			it 'sets itself as both head and tail' do
@@ -45,7 +43,7 @@ describe LinkedList do
 				expect(linked_list.tail).to be(node)
 			end
 		end
-
+		
 		context 'when prepending to a poplulated list' do
 
 			before do
@@ -128,10 +126,6 @@ describe LinkedList do
 
 	describe '#pop' do
 
-		before do 
-			
-		end
-
 		context 'when pop is used on a populated list' do
 			it 'assigns the node before the tail as the tail' do
 				linked_list.append(node)
@@ -156,6 +150,30 @@ describe LinkedList do
 				# binding.pry
 				mod_list = linked_list.pop
 				expect(mod_list.size).to be_nil
+			end
+		end
+	end
+
+	describe '#contains?' do
+
+		before do 
+			linked_list.append(node)
+			linked_list.append(second_node)
+		end
+
+		context 'when given an argument that exists in the list' do
+			it 'returns true' do
+				query = 7
+				returned_value = linked_list.contains?(query)
+				expect(returned_value).to be(true)
+			end
+		end
+
+		context 'when given an argument that does not exist in the list' do
+			it 'returns false' do
+				query = 100
+				returned_value = linked_list.contains?(query)
+				expect(returned_value).to_not be(true)
 			end
 		end
 	end

@@ -15,7 +15,7 @@ Build the following methods in your linked list class:
 
 6. #at(index) returns the node at the given index - x
 
-7. #pop removes the last element from the list
+7. #pop removes the last element from the list - x
 
 8. #contains?(value) returns true if the passed in value is in the list and otherwise returns false.
 
@@ -102,7 +102,6 @@ class LinkedList
 	end
 
 	def pop
-
 		if self.size.nil?
 			puts "The list is empty."
 		elsif @head == @tail
@@ -111,6 +110,12 @@ class LinkedList
 			@tail = self.at(self.size - 2) ; @tail.next_node = nil
 		end
 		return self
+	end
+
+	def contains?(query)
+		arr = []
+		self.each {|node| arr << node if node.value == query}
+		arr.empty? ? false : true
 	end
 end
 

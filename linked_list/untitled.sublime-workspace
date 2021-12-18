@@ -299,7 +299,8 @@
 			"file": "linked_list.rb",
 			"settings":
 			{
-				"buffer_size": 1863,
+				"buffer_size": 2169,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -312,10 +313,14 @@
 			}
 		},
 		{
+			"contents": "#frozen_string_literal: true\n\n\nrequire_relative '../linked_list'\nrequire_relative '../node'\n\n\ndescribe LinkedList do \n\n\tsubject(:linked_list) {LinkedList.new}\n\tlet(:node) {Node.new(7)}\n\tlet(:second_node) {Node.new(8)}\n\n\tdescribe '#append' do\t\t\n\t\tcontext 'when appending to an empty list' do\n\t\t\tit 'sets itself as both tail and head' do\n\t\t\t\tlinked_list.append(node)\n\t\t\t\texpect(linked_list.head).to be(node)\n\t\t\t\texpect(linked_list.tail).to be(node)\n\t\t\tend\n\t\tend\n\n\t\tcontext 'when appending to a populated list' do\n\n\t\t\tbefore do \n\t\t\t\tlinked_list.append(node)\n\t\t\tend\n\n\t\t\tit 'sets itself as tail and sets prev tail.next_node to itself' do\n\t\t\t\tlinked_list.append(second_node)\n\t\t\t\texpect(linked_list.tail).to be(second_node)\n\t\t\t\texpect(linked_list.head.next_node).to be(second_node)\n\t\t\tend\n\t\tend\n\tend\n\n\tdescribe '#prepend' do\n\t\tcontext 'when prepending to an empty list' do\n\t\t\t\n\t\t\tit 'sets itself as both head and tail' do\n\t\t\t\tlinked_list.prepend(node)\n\t\t\t\texpect(linked_list.head).to be(node)\n\t\t\t\texpect(linked_list.tail).to be(node)\n\t\t\tend\n\t\tend\n\t\t\n\t\tcontext 'when prepending to a poplulated list' do\n\n\t\t\tbefore do\n\t\t\t\tlinked_list.prepend(node)\n\t\t\tend\n\n\t\t\tit 'sets its next_next node to current head, and set itself as head ' do\n\t\t\t\tlinked_list.prepend(second_node)\n\t\t\t\texpect(linked_list.head.next_node).to be(node)\n\t\t\t\texpect(linked_list.head).to be(second_node)\n\t\t\tend\n\t\tend\n\tend\n\n\tdescribe '#size' do\n\n\t\tcontext 'when size is called on the linked_list' do\n\t\t\tsubject(:list_size) {described_class.new}\n\n\t\t\tbefore do\n\t\t\t\tn1 = Node.new(\"7\")\n\t\t\t\tn2 = Node.new(\"8\")\n\t\t\t\tn3 = Node.new(\"9\")\n\t\t\t\tlist_size.append(n1)\n\t\t\t\tlist_size.append(n2)\n\t\t\t\tlist_size.append(n3)\n\t\t\tend\n\n\t\t\tit 'returns a count of all the nodes in the list' do\n\t\t\t\tcount = list_size.size\n\t\t\t\texpect(count).to eq(3)\n\t\t\tend\n\t\tend\n\tend\n\n\tdescribe '#head and #tail' do\n\t\tsubject(:getters_list) {described_class.new}\n\n\t\tbefore do \n\t\t\tn1 = Node.new(\"A\")\n\t\t\tn2 = Node.new(\"B\")\n\t\t\tgetters_list.append(n1)\n\t\t\tgetters_list.append(n2)\n\t\tend\n\n\t\tcontext 'when the head method is called' do\n\t\t\tit 'returns the head of the list' do\n\t\t\t\thead = getters_list.head\n\t\t\t\texpect(head).to be(getters_list.head)\n\t\t\tend\n\n\t\t\tcontext 'when the tail method is called' do\n\t\t\t\tit 'returns the tail of the list' do\n\t\t\t\t\ttail = getters_list.tail\n\t\t\t\t\texpect(tail).to be(getters_list.tail)\n\t\t\t\tend\n\t\t\tend\n\t\tend\n\tend\n\n\tdescribe '#at' do\n\n\t\tsubject(:traversal_list) {described_class.new} \n\n\t\tbefore do \n\t\t\tn1 = Node.new(\"7\")\n\t\t\tn2 = Node.new(\"8\")\n\t\t\ttraversal_list.append(n1)\n\t\t\ttraversal_list.append(n2)\n\t\tend\n\n\t\tcontext 'when given a valid index of 1' do\n\n\t\t\tit 'returns the value of node at index 1(\"8\")' do\n\t\t\t\treturned_value = traversal_list.at(1)\n\t\t\t\texpect(returned_value.value).to be(\"8\")\n\t\t\tend\n\t\tend\n\tend\n\n\tdescribe '#pop' do\n\n\t\tcontext 'when pop is used on a populated list' do\n\t\t\tit 'assigns the node before the tail as the tail' do\n\t\t\t\tlinked_list.append(node)\n\t\t\t  linked_list.append(second_node)\n\t\t\t\tmodified_list = linked_list.pop\n\t\t\t\texpect(modified_list.tail).to be(node)\n\t\t\tend\n\t\tend\n\n\t\tcontext 'when pop is used on an empty list' do\n\t\t\tit 'returns a message stating the list is empty' do\n\t\t\t\tmessage = \"The list is empty.\"\n\t\t\t\t# binding.pry\n\t\t\t\texpect(linked_list).to receive(:puts).with(message)\n\t\t\t\tlinked_list.pop\n\t\t\tend\n\t\tend\n\n\t\tcontext 'when pop is called on a list with only one node' do\n\t\t\tit 'it assigns both head and tail as nil' do\n\t\t\t\tlinked_list.append(node)\n\t\t\t\t# binding.pry\n\t\t\t\tmod_list = linked_list.pop\n\t\t\t\texpect(mod_list.size).to be_nil\n\t\t\tend\n\t\tend\n\tend\nend",
 			"file": "spec/linked_list_spec.rb",
+			"file_size": 3546,
+			"file_write_time": 132840708615636538,
 			"settings":
 			{
-				"buffer_size": 2740,
+				"buffer_size": 3522,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -365,6 +370,7 @@
 	},
 	"file_history":
 	[
+		"/home/wesley/Desktop/working_github/original_linked_list.rb",
 		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/lib/game_solution.rb",
 		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/game_spec_solution.rb",
 		"/home/wesley/Dropbox/ODIN/working_code/tictactoe/board_spec_solution.rb",
@@ -491,8 +497,7 @@
 		"/home/wesley/Dropbox/ODIN/code/text_adventure_working.rb",
 		"/home/wesley/web_development/github/curriculum/ruby_programming/computer_science/project_recursion.md",
 		"/home/wesley/web_development/github/ruby_programming/computer_science/project_recursion.md",
-		"/home/wesley/web_development/git_repositories/Odin-Projects/x.rb",
-		"/home/wesley/web_development/git_repositories/Odin-Projects/fibonacci.rb"
+		"/home/wesley/web_development/git_repositories/Odin-Projects/x.rb"
 	],
 	"find":
 	{
@@ -536,24 +541,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1863,
+						"buffer_size": 2169,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1971,
+								1971
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"translate_tabs_to_spaces": false,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 684.0,
+						"translation.y": 1254.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -599,15 +605,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2740,
+						"buffer_size": 3522,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1094,
+								1094
 							]
 						],
 						"settings":
