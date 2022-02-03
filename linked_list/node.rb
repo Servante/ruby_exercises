@@ -5,5 +5,9 @@ class Node
 		@value = value
 		@next_node = next_node
 	end
+
+	def update_next_node(update)
+		node.next_node = update
+	end
 end
 

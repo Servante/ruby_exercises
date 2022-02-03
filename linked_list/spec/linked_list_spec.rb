@@ -3,13 +3,15 @@
 
 require_relative '../linked_list'
 require_relative '../node'
-
+require_relative 'node_spec.rb'
+require 'pry'
 
 describe LinkedList do 
 
 	subject(:linked_list) {LinkedList.new}
 	let(:node) {Node.new(7)}
 	let(:second_node) {Node.new(8)}
+	let(:third_node) {Node.new(13)}
 
 	describe '#append' do		
 		context 'when appending to an empty list' do
@@ -201,4 +203,70 @@ describe LinkedList do
 			end
 		end
 	end
+
+	describe '#insert_at' do
+
+		before do
+			linked_list.append(node)
+			linked_list.append(second_node)
+			linked_list.append(third_node)
+		end
+
+		context 'when you insert a new node at a given index' do
+
+			before do 
+			end
+
+			it 'it sets the prior node.next_node to the new_node' do
+				new_node = Node.new(40)
+				index = 2
+				prior_node = (linked_list.at(index-1))
+				linked_list.insert_at(index)
+				expect(prior_node.next_node).to be(new_node)
+			end
+
+			xit 'sets the previous node\'s next_node to new_node.next_node' do
+
+			end
+		end
+
+		context 'if requested index doesn\'t exist' do
+			xit 'returns nil' do
+			end
+		end
+
+		context 'if requested index is @tail' do
+			xit 'inserts and maintains original @tail' do
+			end
+		end
+
+		context 'if requested index is @head' do
+			xit 'it sets itself as head' do
+			end
+		end
+	end
+
+	describe '#remove_at' do
+		context 'when remove an existing node at a given index' do
+			xit 'sets the prior node\'s next_node to the next_node of deleted node' do
+			end
+		end
+
+		context 'if the requested index doesn\'t exist' do
+			xit 'returns nil' do
+			end
+		end
+
+		context 'if requested index is @head' do
+			xit 'sets the next node as @head' do
+			end
+		end
+
+		context 'if requested index is @tail' do
+			xit 'sets the prior node to @tail' do 
+			end
+		end
+	end
 end
+
+#fix the above... make sure logic is correct

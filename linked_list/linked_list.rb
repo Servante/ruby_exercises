@@ -51,26 +51,6 @@ class LinkedList
 		@tail = nil
 	end
 
-	def each
-		return nil if @head.nil?
-		entry = @head
-		until entry.nil?
-			yield entry
-			entry = entry.next_node
-		end
-	end
-
-	def each_with_index
-		return nil if @head.nil?
-		entry = @head
-		counter = 0
-		until entry.nil?
-			yield entry, counter
-			counter += 1
-			entry = entry.next_node
-		end
-	end
-
 	def empty_list(value) #assigns value to head/tail if list is empty
 		@head = value ; @tail = value		
 	end
@@ -141,6 +121,35 @@ class LinkedList
 		self.each {|node| array << "( #{node.value} ) ->" }
 		array << " nil "
 		return array.join(" ")
+	end
+
+	def insert_at(index)
+		prior_node = self.at(index-1)
+	end
+		
+
+
+
+	private
+
+	def each
+		return nil if @head.nil?
+		entry = @head
+		until entry.nil?
+			yield entry
+			entry = entry.next_node
+		end
+	end
+
+	def each_with_index
+		return nil if @head.nil?
+		entry = @head
+		counter = 0
+		until entry.nil?
+			yield entry, counter
+			counter += 1
+			entry = entry.next_node
+		end
 	end
 end
 
