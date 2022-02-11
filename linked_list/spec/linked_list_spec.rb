@@ -4,7 +4,6 @@
 require_relative '../linked_list'
 require_relative '../node'
 require_relative 'node_spec.rb'
-require 'pry'
 
 describe LinkedList do 
 
@@ -140,7 +139,6 @@ describe LinkedList do
 		context 'when pop is used on an empty list' do
 			it 'returns a message stating the list is empty' do
 				message = "The list is empty."
-				# binding.pry
 				expect(linked_list).to receive(:puts).with(message)
 				linked_list.pop
 			end
@@ -149,7 +147,6 @@ describe LinkedList do
 		context 'when pop is called on a list with only one node' do
 			it 'it assigns both head and tail as nil' do
 				linked_list.append(node)
-				# binding.pry
 				mod_list = linked_list.pop
 				expect(mod_list.size).to be_nil
 			end
