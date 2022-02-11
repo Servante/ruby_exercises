@@ -123,8 +123,17 @@ class LinkedList
 		return array.join(" ")
 	end
 
-	def insert_at(index)
-		prior_node = self.at(index-1)
+	def insert_at(index, new_node)
+		# binding.pry
+		if self.at(index) == nil
+			return nil
+		elsif (self.at(index)) == (self.head)
+			new_node.next_node = @head ; @head = new_node
+	  else
+	  	prior_node = self.at(index - 1)  
+	  	replaced_node = self.at(index)
+	  	prior_node.next_node = new_node ; new_node.next_node = replaced_node
+	  end 	
 	end
 		
 

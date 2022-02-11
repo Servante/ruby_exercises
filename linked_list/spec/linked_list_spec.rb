@@ -206,6 +206,8 @@ describe LinkedList do
 
 	describe '#insert_at' do
 
+		let(:new_node) {Node.new(40)}
+
 		before do
 			linked_list.append(node)
 			linked_list.append(second_node)
@@ -218,30 +220,32 @@ describe LinkedList do
 			end
 
 			it 'it sets the prior node.next_node to the new_node' do
-				new_node = Node.new(40)
 				index = 2
-				prior_node = (linked_list.at(index-1))
-				linked_list.insert_at(index)
+				prior_node = linked_list.at(index-1)
+				linked_list.insert_at(index, new_node)				
 				expect(prior_node.next_node).to be(new_node)
-			end
+			end 
 
-			xit 'sets the previous node\'s next_node to new_node.next_node' do
-
+			it 'sets new_node.next_node to prior_node' do
+				index = 2
+				prior_node = (linked_list.at(index))
+				linked_list.insert_at(index, new_node)
+				expect(new_node.next_node).to be(prior_node)
 			end
 		end
 
 		context 'if requested index doesn\'t exist' do
-			xit 'returns nil' do
-			end
-		end
-
-		context 'if requested index is @tail' do
-			xit 'inserts and maintains original @tail' do
+			it 'returns nil' do
+				index = 100
+				expect(linked_list.insert_at(index, new_node)).to be nil
 			end
 		end
 
 		context 'if requested index is @head' do
-			xit 'it sets itself as head' do
+			it 'it sets itself as head' do
+				new_node = Node.new(40)
+				linked_list.insert_at(0, new_node)
+				expect(linked_list.head).to be(new_node)
 			end
 		end
 	end
