@@ -251,26 +251,48 @@ describe LinkedList do
 	end
 
 	describe '#remove_at' do
-		context 'when remove an existing node at a given index' do
-			xit 'sets the prior node\'s next_node to the next_node of deleted node' do
+
+		let(:new_node) {Node.new(31)}
+
+		before do
+			linked_list.append(node)
+			linked_list.append(second_node)
+			linked_list.append(third_node)
+		end
+
+
+		context 'when you remove an existing node at a given index' do
+			it 'sets the prior node\'s next_node to the next_node of deleted node' do
+				index = 1
+				prior_node = linked_list.at(index - 1)
+				deleted_node_next = linked_list.at(index).next_node
+				expect(prior_node.next_node).to be(deleted_node_next)
 			end
 		end
 
 		context 'if the requested index doesn\'t exist' do
 			xit 'returns nil' do
+				index = 5
+				expect(linked_list.remove_at(index)).to be(nil)
 			end
 		end
 
 		context 'if requested index is @head' do
 			xit 'sets the next node as @head' do
+				index = 0
+				next_node = linked_list.head.next_node
+				linked_list.remove_at(index)
+				expect(linked_list.head).to be(next_node)
 			end
 		end
 
 		context 'if requested index is @tail' do
 			xit 'sets the prior node to @tail' do 
+				index = 2
+				prior_node = linked_list.at(index - 1)
+				linked_list.remove_at(index)
+				expect(linked_list.tail).to be(prior_node)
 			end
 		end
 	end
 end
-
-#fix the above... make sure logic is correct

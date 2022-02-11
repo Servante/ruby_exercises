@@ -25,11 +25,10 @@ Build the following methods in your linked list class:
 
 EC
 
-11. #insert_at(value, index) that inserts a new node with the provided value at the given index.
+11. #insert_at(value, index) that inserts a new node with the provided value at the given index. - x
 
 12. #remove_at(index) that removes the node at the given index.
 
-13. comment all methods
 
 
 =end
@@ -124,7 +123,6 @@ class LinkedList
 	end
 
 	def insert_at(index, new_node)
-		# binding.pry
 		if self.at(index) == nil
 			return nil
 		elsif (self.at(index)) == (self.head)
@@ -134,6 +132,18 @@ class LinkedList
 	  	replaced_node = self.at(index)
 	  	prior_node.next_node = new_node ; new_node.next_node = replaced_node
 	  end 	
+
+		def remove_at(index)
+	  	if self.at(index) == nil
+	  		return nil
+	  	elsif (self.at(index)) == (self.head)
+	  		@head = self.at(index).next_node
+	  	elsif (self.at(index)) == (self.tail)
+	  		@tail = (self.at(index - 1)) ; self.at(index - 1).next_node = nil
+	  	else
+	  		self.at(index - 1).next_node = self.at(index).next_node
+	  	end
+	  end
 	end
 		
 
