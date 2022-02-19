@@ -1,6 +1,6 @@
 # Ruby Exercises 
 These exercises are from [The Odin Project](https://www.theodinproject.com/courses/ruby-programming)'s Ruby curriculum.
-
+*links may be outdated
 ## Basic section
 [substrings](https://www.theodinproject.com/courses/ruby-programming/lessons/sub-strings)\
 [stock_picker](https://www.theodinproject.com/courses/ruby-programming/lessons/stock-picker)\
