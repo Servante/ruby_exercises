@@ -63,12 +63,11 @@ class Board
 
 	def knight_travails(location, target)  
 	 @alpha_knight = Knight.new(location)
-	 create_tree(target, queue = [@alpha_knight])
-	 path = find_path(location, destination)
+	 create_tree(target)
+	 path = find_path(target)
+	 puts "You made it in #{(path.size) - 1} moves "
 	 puts "Your path is:"
-	 path.each_with_index do |index, move|
-	 	puts "[#{index}, #{move}]"
-	 end
+	 path.each_with_index {|move, index| puts "#{index}: #{move}"}
 	end
 
 	def create_tree(target, queue = [@alpha_knight], index = 0)
@@ -77,14 +76,16 @@ class Board
 		create_children(current)
 
 		current.children.each do |child|
-			queue << child unless queue.include? child
+			next if queue.include?(child)
+
+			queue << child
 		end
 
-		return if current = find_child(destination)
+		return if current = find_child(target)
 		return if index >= 66
 
 		index += 1
-		create_tree(queue, index)
+		create_tree(target, queue, index)
 	end
 
 	def create_children(knight)
@@ -95,31 +96,39 @@ class Board
 	end
 
 	def find_child(target, queue = [@alpha_knight], index = 0)
-		current = queue[index]
+
 		found_knight = nil
-		return nil if current.nil?
+		current = queue[index]		
+		return if current.nil?
+
 		current.children.each do |child|
 			queue << child unless queue.include?(child)
+			# binding.pry
 			found_knight = child if child.location == target
 		end
-		binding.pry
-		return found_knight unless found_knight.nil?
+		# binding.pry
 		index += 1
+		return found_knight unless found_knight.nil?
+		
 
 		find_child(target, queue, index)
 	end
 
 	def find_path(target, path = [target])
+		# binding.pry
 		parent = find_parent(target)
+		# binding.pry
 		path << parent.location
 		return path if parent == @alpha_knight
+		# binding.pry
 
-		find_parent(target, path)
+		find_path(parent.location, path)
 	end
 
-	def find_parent(target, queue = [@alpha], index = 0)
+	def find_parent(target, queue = [@alpha_knight], index = 0)
+		# binding.pry
 		current = queue[index]
-		parent = current.moves.any?(target)
+		parent = current.moves.any? { |move| move == target }
 		return if current.nil?
 		return current if parent == true
 
@@ -139,7 +148,7 @@ class Knight
 	attr_accessor :location, :moves, :children
 
 	def initialize(location)
-		@locaton = location
+		@location = location
 		@moves = get_moves(location)
 		@children = []
 	end	
@@ -154,6 +163,7 @@ class Knight
 		return result
 	end
 end
+
 
 
 
